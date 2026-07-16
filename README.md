@@ -1,4 +1,4 @@
-# Awesome Bash Aliases
+# 🚀 Awesome Bash Aliases
 
 A carefully curated collection of safe, practical, and modern shell aliases and functions for developers, DevOps engineers, platform engineers, system administrators, solution architects, and Linux/macOS power users.
 
@@ -20,7 +20,7 @@ Website: `https://vikaskyadav.github.io/awesome-bash-alias/`
 
 ---
 
-## Why This Project?
+## ✨ Why This Project?
 
 Shell aliases are easy to create but difficult to maintain well.
 
@@ -37,7 +37,7 @@ A reliable collection should:
 
 ---
 
-## Supported Shells
+## 🖥️ Supported Shells
 
 The primary target is:
 
@@ -49,7 +49,7 @@ Some completion settings are shell-specific and are stored separately.
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```text
 awesome-bash-alias/
@@ -85,7 +85,7 @@ This modular structure allows users to enable only the sections they need.
 
 ---
 
-# Installation
+# ⚡ Installation
 
 ## Quick Installation
 
@@ -112,7 +112,7 @@ Before installing, users should review the aliases and remove any that conflict 
 
 ---
 
-# Configuration Principles
+# ⚙️ Configuration Principles
 
 ## Aliases versus Functions
 
@@ -145,7 +145,7 @@ mkcd() {
 
 ---
 
-# Core Configuration
+# 🧰 Core Configuration
 
 ## Helpers
 
@@ -212,7 +212,7 @@ reload-shell() {
 
 ---
 
-# Navigation
+# 📂 Navigation
 
 Use one consistent hierarchy rather than defining several conflicting alternatives.
 
@@ -281,7 +281,7 @@ croot
 
 ---
 
-# File Listing
+# 📄 File Listing
 
 Linux and macOS ship different implementations of several core utilities. Configure them separately.
 
@@ -311,7 +311,7 @@ Do not configure `ls='ls -a'`; doing so unexpectedly changes the behaviour of ev
 
 ---
 
-# Safe File Operations
+# 🛡️ Safe File Operations
 
 Overriding standard commands can sometimes break scripts or surprise experienced users. Therefore, explicit safe variants are preferable.
 
@@ -348,7 +348,7 @@ fi
 
 ---
 
-# File Search and Inspection
+# 🔍 File Search and Inspection
 
 ```bash
 alias grep='grep --color=auto'
@@ -417,7 +417,7 @@ extract() {
 
 ---
 
-# Disk Usage
+# 💾  Disk Usage
 
 GNU and BSD `du` use different depth options.
 
@@ -445,7 +445,7 @@ fi
 
 ---
 
-# Calculator and Encoding
+# 🧮 Calculator and Encoding
 
 ```bash
 alias calc='bc -l'
@@ -476,7 +476,7 @@ sha256file() {
 
 ---
 
-# History
+# 📜 History
 
 ```bash
 alias h='history'
@@ -513,9 +513,9 @@ Avoid storing secrets directly in shell commands because they may be retained in
 
 ---
 
-# Git
+# 🌿  Git
 
-## Everyday Git
+## 📖 Everyday Git
 
 ```bash
 alias g='git'
@@ -570,7 +570,7 @@ alias gremotes='git remote --verbose'
 alias gcontributors='git shortlog --summary --numbered --email'
 ```
 
-## Git Logs
+## 📈 Git Logs
 
 ```bash
 alias glog='git log --oneline --decorate --graph'
@@ -579,7 +579,7 @@ alias glast='git log -1 HEAD --stat'
 alias gwho='git shortlog -sn'
 ```
 
-## Git Functions
+## 🔧 Git Functions
 
 ```bash
 gclone() {
@@ -645,11 +645,11 @@ fi
 
 ---
 
-# Docker
+# 🐳 Docker
 
 Docker commands should normally run without `sudo`. Users should configure Docker according to their operating system and security model.
 
-## Container and Image Commands
+## 📦 Container and Image Commands
 
 ```bash
 if has docker; then
@@ -678,7 +678,7 @@ if has docker; then
 fi
 ```
 
-## Docker Functions
+## 🛠 Docker Functions
 
 ```bash
 dsh() {
@@ -768,7 +768,7 @@ Avoid making `docker system prune -af`, deletion of every container, or deletion
 
 ---
 
-# Docker Compose
+# 🐋 Docker Compose
 
 Modern Docker installations use the Compose CLI plugin:
 
@@ -794,9 +794,9 @@ fi
 
 ---
 
-# Kubernetes
+# ☸️ Kubernetes
 
-## Core Commands
+## 🎯 Core Commands
 
 ```bash
 if has kubectl; then
@@ -848,7 +848,7 @@ if has kubectl; then
 fi
 ```
 
-## Kubernetes Functions
+## 🔧 Kubernetes Functions
 
 ```bash
 kuse() {
@@ -897,7 +897,7 @@ Do not create an alias that deletes every Kubernetes resource or namespace. Clus
 
 ---
 
-# Helm
+# ⛵ Helm
 
 ```bash
 if has helm; then
@@ -939,7 +939,7 @@ alias hmlsa='helm list --all-namespaces'
 
 ---
 
-# Terraform and OpenTofu
+# 🏗️ Terraform and OpenTofu
 
 ```bash
 if has terraform; then
@@ -970,7 +970,7 @@ Do not alias `terraform destroy` or `tofu destroy` to a short, easily mistyped c
 
 ---
 
-# Ansible
+# 🤖 Ansible
 
 ```bash
 if has ansible; then
@@ -985,7 +985,7 @@ fi
 
 ---
 
-# Networking
+# 🌐 Networking
 
 ## General Commands
 
@@ -1081,7 +1081,7 @@ killport() {
 
 ---
 
-# HTTP and API Development
+# 🌎 HTTP and API Development
 
 ```bash
 alias headers='curl --head'
@@ -1125,7 +1125,7 @@ serve-lan() {
 
 ---
 
-# System Monitoring
+# 📊 System Monitoring
 
 ```bash
 alias mem='free -h'
@@ -1166,7 +1166,7 @@ psgrep() {
 
 ---
 
-# Linux System Information
+# 🖥️ Linux System Information
 
 ```bash
 if [ "$AWESOME_ALIAS_OS" = "linux" ]; then
@@ -1194,7 +1194,7 @@ The old Xorg log-based GPU-memory alias is unreliable on modern Wayland, headles
 
 ---
 
-# systemd and Logs
+# 📒 systemd and Logs
 
 ```bash
 if has systemctl; then
@@ -1228,11 +1228,11 @@ svclogs() {
 
 ---
 
-# Package Management
+# 📦 Package Management
 
 Do not use one generic `update` alias for every operating system. Package-management commands differ materially between distributions.
 
-## Debian and Ubuntu
+## 🐧  Debian and Ubuntu
 
 ```bash
 if has apt; then
@@ -1247,7 +1247,7 @@ if has apt; then
 fi
 ```
 
-## Fedora, RHEL and Compatible Systems
+## 🎩  Fedora, RHEL and Compatible Systems
 
 ```bash
 if has dnf; then
@@ -1258,7 +1258,7 @@ if has dnf; then
 fi
 ```
 
-## Arch Linux
+## 🏹 Arch Linux
 
 ```bash
 if has pacman; then
@@ -1269,7 +1269,7 @@ if has pacman; then
 fi
 ```
 
-## Alpine Linux
+## 🏔 Alpine Linux
 
 ```bash
 if has apk; then
@@ -1279,7 +1279,7 @@ if has apk; then
 fi
 ```
 
-## Homebrew
+## 🍺 Homebrew
 
 ```bash
 if has brew; then
@@ -1297,7 +1297,7 @@ Automatic `-y` should not be added universally. Users should see and approve sub
 
 ---
 
-# macOS
+# 🍎 macOS
 
 ```bash
 if [ "$AWESOME_ALIAS_OS" = "macos" ]; then
@@ -1328,7 +1328,7 @@ app() {
 
 ---
 
-# Service and Power Operations
+# ⚡  Service and Power Operations
 
 Commands that restart or shut down a machine should remain explicit.
 
@@ -1342,7 +1342,7 @@ Do not redefine standard commands such as `reboot`, `shutdown`, `halt`, or `powe
 
 ---
 
-# Node.js and JavaScript
+# 🟢  Node.js and JavaScript
 
 ```bash
 if has npm; then
@@ -1378,7 +1378,7 @@ Avoid `pt='ping facebook.com'`, because `pt` is more useful for package-manager 
 
 ---
 
-# Python
+# 🐍 Python
 
 ```bash
 if has python3; then
