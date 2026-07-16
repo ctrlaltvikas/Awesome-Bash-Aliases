@@ -987,7 +987,7 @@ fi
 
 # 🌐 Networking
 
-## General Commands
+## 📡 General Commands
 
 ```bash
 alias ping5='ping -c 5'
@@ -1001,7 +1001,7 @@ alias hostsfile='cat /etc/hosts'
 
 Avoid aliasing the standard `ping` command globally to `ping -c 5`, because users may expect normal continuous ping behaviour.
 
-## Public IP
+## 🌍  Public IP
 
 ```bash
 publicip() {
@@ -1018,7 +1018,7 @@ publicip() {
 }
 ```
 
-## Local IP
+## 🏠 Local IP
 
 ```bash
 localip() {
@@ -1034,7 +1034,7 @@ localip() {
 }
 ```
 
-## Port Inspection
+## 🚪 Port Inspection
 
 ```bash
 portcheck() {
@@ -1081,7 +1081,7 @@ killport() {
 
 ---
 
-# 🌎 HTTP and API Development
+# 🌎  HTTP and API Development
 
 ```bash
 alias headers='curl --head'
@@ -1413,7 +1413,7 @@ alias pyupgrade='python3 -m pip install --upgrade'
 
 ---
 
-# Java and Build Tools
+# ☕ Java and Build Tools
 
 ```bash
 if has mvn; then
@@ -1444,7 +1444,7 @@ alias gradleb='gradle build'
 
 ---
 
-# Go
+# 🐹 Go
 
 ```bash
 if has go; then
@@ -1459,7 +1459,7 @@ fi
 
 ---
 
-# Rust
+# 🦀 Rust
 
 ```bash
 if has cargo; then
@@ -1483,7 +1483,7 @@ alias cargo-t='cargo test'
 
 ---
 
-# Databases
+# 🗄️ Databases
 
 ```bash
 if has psql; then
@@ -1503,7 +1503,7 @@ Do not embed usernames, passwords, tokens, production hosts, or connection strin
 
 ---
 
-# JSON and YAML
+# 🧾 JSON and YAML
 
 ```bash
 if has jq; then
@@ -1540,7 +1540,7 @@ jsonclip() {
 
 ---
 
-# TLS and Certificates
+# 🔐 TLS and Certificates
 
 ```bash
 if has openssl; then
@@ -1574,9 +1574,9 @@ tlscheck() {
 
 ---
 
-# Cloud CLIs
+# ☁️ Cloud CLIs
 
-## AWS
+## 🟠 AWS
 
 ```bash
 if has aws; then
@@ -1586,7 +1586,7 @@ if has aws; then
 fi
 ```
 
-## Azure
+## 🔵 Azure
 
 ```bash
 if has az; then
@@ -1596,7 +1596,7 @@ if has az; then
 fi
 ```
 
-## Google Cloud
+## 🔴 Google Cloud
 
 ```bash
 if has gcloud; then
@@ -1610,7 +1610,7 @@ Do not add short aliases for deleting cloud resources, changing production accou
 
 ---
 
-# Modern CLI Enhancements
+# 🚀 Modern CLI Enhancements
 
 These aliases activate only when the corresponding optional tool is installed.
 
@@ -1683,11 +1683,11 @@ Users should understand tool behaviour before replacing foundational commands su
 
 ---
 
-# Shell Completion
+# ⌨️  Shell Completion
 
 Aliases are most useful when tab completion continues to work.
 
-## Bash
+## 🐚  Bash
 
 ```bash
 if has kubectl; then
@@ -1706,7 +1706,7 @@ if has docker; then
 fi
 ```
 
-## Zsh
+## 💎 Zsh
 
 ```zsh
 autoload -Uz compinit
@@ -1724,7 +1724,7 @@ fi
 
 ---
 
-# Optional Administrative Commands
+# ⚠️ Optional Administrative Commands
 
 Potentially disruptive commands should live in a separate file that is not loaded by default.
 
@@ -1790,7 +1790,7 @@ Destructive commands should:
 
 ---
 
-# Commands Intentionally Excluded
+# 🚫 Commands Intentionally Excluded
 
 The following patterns are deliberately excluded from the default collection:
 
@@ -1821,7 +1821,7 @@ Also excluded:
 
 ---
 
-# Alias Naming Convention
+# 🏷️ Alias Naming Convention
 
 Recommended prefixes:
 
@@ -1850,7 +1850,7 @@ Rules:
 
 ---
 
-# Conflict Detection
+# 🔎 Conflict Detection
 
 Provide a helper to identify aliases already configured in the user’s shell:
 
@@ -1880,7 +1880,7 @@ alias-check h c l ll gs k d dc tf
 
 ---
 
-# Testing
+# 🧪 Testing
 
 Use ShellCheck and Bats.
 
@@ -1909,7 +1909,7 @@ bash -n modules/*.sh
 
 ---
 
-# Security Guidance
+# 🔒 Security Guidance
 
 Aliases are executable shell configuration. Treat third-party alias collections like source code.
 
@@ -1928,7 +1928,7 @@ Before installation:
 
 ---
 
-# Contribution Guidelines
+# 🤝 Contribution Guidelines
 
 Contributions are welcome.
 
@@ -1949,7 +1949,7 @@ Pull requests adding many aliases should group them by domain rather than placin
 
 ---
 
-# Recommended Default Modules
+# ⭐ Recommended Default Modules
 
 For most developers:
 
@@ -1987,7 +1987,7 @@ Destructive administrative helpers should not be loaded automatically:
 
 ---
 
-# Suggested Starter Profile
+# 🎯 Suggested Starter Profile
 
 Users who prefer one compact file can begin with:
 
@@ -2061,7 +2061,7 @@ This starter profile is intentionally conservative. Users can add domain-specifi
 
 ---
 
-# Roadmap
+# 🛣️ Roadmap
 
 Planned improvements:
 
@@ -2084,7 +2084,7 @@ Planned improvements:
 
 ---
 
-# Philosophy
+# 💡 Philosophy
 
 The best alias is not necessarily the shortest.
 
