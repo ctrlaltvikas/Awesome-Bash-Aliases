@@ -16,7 +16,7 @@ The project focuses on:
 
 > **Principle:** Save keystrokes without hiding important behaviour or making destructive operations dangerously easy.
 
-Website: `https://vikaskyadav.github.io/awesome-bash-alias/`
+Documentation: [README on GitHub](https://github.com/ctrlaltvikas/Awesome-Bash-Aliases#readme)
 
 ---
 
@@ -45,11 +45,18 @@ The primary target is:
 * Bash 5+
 * Zsh, where syntax is compatible
 
-Some completion settings are shell-specific and are stored separately.
+Completion examples below are shell-specific; use the section for your shell.
 
 ---
 
 ## 📁 Repository Structure
+
+This repository currently contains `README.md` and the website theme configuration,
+`_config.yml`. The aliases and functions are examples in this README, not installed
+shell files.
+
+The following is a suggested layout for organizing your own selected snippets;
+these files are not included in this repository:
 
 ```text
 awesome-bash-alias/
@@ -81,25 +88,38 @@ awesome-bash-alias/
     └── aliases.bats
 ```
 
-This modular structure allows users to enable only the sections they need.
+If you create this modular structure locally, you can enable only the sections you need.
 
 ---
 
 # ⚡ Installation
 
-## Quick Installation
+## Manual Installation
+
+Cloning this repository does not provide an `aliases.sh` file or an installer.
+To keep a local copy of the documentation:
 
 ```bash
-git clone https://github.com/vikaskyadav/awesome-bash-alias.git \
+git clone https://github.com/ctrlaltvikas/Awesome-Bash-Aliases.git \
   "${HOME}/.awesome-bash-alias"
+```
 
+Create `${HOME}/.awesome-bash-alias/aliases.sh` yourself in a text editor. Copy
+only the snippets you have reviewed and want to use, starting with the
+[Suggested Starter Profile](#-suggested-starter-profile) if desired. Do not source
+the README. Resolve conflicting alias names and use only completion/settings
+examples compatible with your shell.
+
+After creating and reviewing that file, load it from Bash:
+
+```bash
 printf '\n# Awesome Bash Aliases\n' >> "${HOME}/.bashrc"
 printf 'source "$HOME/.awesome-bash-alias/aliases.sh"\n' >> "${HOME}/.bashrc"
 
 source "${HOME}/.bashrc"
 ```
 
-For Zsh:
+For Zsh, after creating the same local file with Zsh-compatible snippets:
 
 ```bash
 printf '\n# Awesome Bash Aliases\n' >> "${HOME}/.zshrc"
@@ -1735,7 +1755,7 @@ Example:
 # source "$HOME/.awesome-bash-alias/optional/dangerous.sh"
 ```
 
-`optional/dangerous.sh`:
+Example contents for a locally created `optional/dangerous.sh`:
 
 ```bash
 confirm() {
@@ -1882,7 +1902,9 @@ alias-check h c l ll gs k d dc tf
 
 # 🧪 Testing
 
-Use ShellCheck and Bats.
+The repository does not currently include shell files or a test suite. If you
+create the suggested modular layout, use ShellCheck and Bats on your local files
+and tests (the commands below assume those files have been created).
 
 ```bash
 shellcheck aliases.sh modules/*.sh optional/*.sh
@@ -1950,6 +1972,10 @@ Pull requests adding many aliases should group them by domain rather than placin
 ---
 
 # ⭐ Recommended Default Modules
+
+These examples assume you have created the suggested local module layout above.
+The modules are not supplied by this repository; do not run these `source`
+commands against a fresh clone.
 
 For most developers:
 
@@ -2057,7 +2083,7 @@ has lazygit && alias lg='lazygit'
 has btop && alias top='btop'
 ```
 
-This starter profile is intentionally conservative. Users can add domain-specific modules as their workflow grows.
+This starter profile is intentionally conservative. Users can copy additional domain-specific snippets into their local file or create their own modules as their workflow grows.
 
 ---
 
