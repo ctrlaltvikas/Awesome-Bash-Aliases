@@ -1998,9 +1998,36 @@
     "file": "aliases/40-net.aliases.bash"
   },
   {
+    "name": "portopen",
+    "category": "Networking",
+    "description": "Fast TCP port reachability probe with configurable timeout.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "tcpconns",
+    "category": "Networking",
+    "description": "Count and group active TCP network connections by socket state.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "netstat -an | awk '\\''/^tcp/ {print $NF}'\\'' | sort | uniq -c | sort -nr",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
     "name": "publicip",
     "category": "Networking",
     "description": "Query and display your external public IPv4 address.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "publicip6",
+    "category": "Networking",
+    "description": "Query and display your external public IPv6 address.",
     "os": "cross-platform",
     "type": "function",
     "command": null,
@@ -2028,6 +2055,24 @@
     "name": "myip",
     "category": "Networking",
     "description": "Print clean formatted summary of both internal and external IP addresses.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "gateway",
+    "category": "Networking",
+    "description": "Detect and print the IP address of the default gateway router.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "macaddr",
+    "category": "Networking",
+    "description": "Print physical MAC hardware addresses for network interfaces.",
     "os": "cross-platform",
     "type": "function",
     "command": null,
@@ -2088,6 +2133,51 @@
     "file": "aliases/40-net.aliases.bash"
   },
   {
+    "name": "digshort",
+    "category": "Networking",
+    "description": "Query DNS records in compact format returning only answer values.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "dig +short",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "digall",
+    "category": "Networking",
+    "description": "Query DNS records with complete multiline answers without header clutter.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "dig +noall +answer +multiline",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "digtrace",
+    "category": "Networking",
+    "description": "Trace recursive DNS delegation step-by-step from root nameservers.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "dig +trace",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "dnsptr",
+    "category": "Networking",
+    "description": "Perform reverse DNS lookup to discover hostname assigned to an IP.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "whoisip",
+    "category": "Networking",
+    "description": "Query WHOIS details summarizing organization, country, and CIDR range.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
     "name": "headers",
     "category": "Networking",
     "description": "Fetch and display only HTTP response headers for target URL.",
@@ -2115,6 +2205,24 @@
     "file": "aliases/40-net.aliases.bash"
   },
   {
+    "name": "httpstatus",
+    "category": "Networking",
+    "description": "Query and return only the HTTP response status code for target URL.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "curltime",
+    "category": "Networking",
+    "description": "Measure detailed HTTP timing breakdown including DNS, TCP, TLS, and TTFB.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
     "name": "serve",
     "category": "Networking",
     "description": "Spin up local development HTTP server bound to loopback 127.0.0.1.",
@@ -2127,6 +2235,51 @@
     "name": "serve-lan",
     "category": "Networking",
     "description": "Spin up development HTTP server bound to 0.0.0.0 for LAN access.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "tlscheck",
+    "category": "Networking",
+    "description": "Inspect remote server TLS certificate subject, issuer, and expiry dates.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "tlsexpiry",
+    "category": "Networking",
+    "description": "Display the exact expiration timestamp for a remote domain TLS certificate.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "tlscertfile",
+    "category": "Networking",
+    "description": "Inspect and decode a local X.509 certificate file (.crt or .pem).",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "opensslver",
+    "category": "Networking",
+    "description": "Display OpenSSL version and compilation build platform flags.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "openssl version -a",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "downloadtest",
+    "category": "Networking",
+    "description": "Measure internet download throughput rate via Cloudflare edge CDN.",
     "os": "cross-platform",
     "type": "function",
     "command": null,

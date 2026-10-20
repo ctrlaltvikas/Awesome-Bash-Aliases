@@ -3,7 +3,8 @@
 # 🌐 40-net.aliases.bash — Networking, Port Inspection & Diagnostic Utilities
 # ==============================================================================
 # Network interface diagnostics, listening port inspection, public/local IP tools,
-# DNS resolution helpers, API HTTP shortcuts, and dev web server functions.
+# DNS resolution helpers, API latency profilers, TLS certificate auditors,
+# and lightweight development web server functions.
 #
 # Part of the Awesome Bash Aliases suite.
 # Compatible with Bash 3.2+, Bash 4+, Bash 5+, and Zsh.
@@ -81,6 +82,43 @@ killport() {
 # @os: cross-platform
 alias netstat-listen='netstat -tuln 2>/dev/null || netstat -an | grep LISTEN'
 
+# @name: portopen
+# @category: Networking
+# @description: Fast TCP port reachability probe with configurable timeout.
+# @os: cross-platform
+portopen() {
+    if [ "$#" -lt 2 ]; then
+        printf 'Usage: portopen <host> <port> [timeout-seconds]\n' >&2
+        return 2
+    fi
+
+    local host="$1"
+    local port="$2"
+    local timeout="${3:-3}"
+
+    if command -v nc >/dev/null 2>&1; then
+        if nc -z -w "$timeout" "$host" "$port" 2>/dev/null; then
+            printf '✅ Port %s on %s is OPEN\n' "$port" "$host"
+            return 0
+        else
+            printf '❌ Port %s on %s is CLOSED or UNREACHABLE\n' "$port" "$host"
+            return 1
+        fi
+    elif (echo > "/dev/tcp/${host}/${port}") 2>/dev/null; then
+        printf '✅ Port %s on %s is OPEN\n' "$port" "$host"
+        return 0
+    else
+        printf '❌ Port %s on %s is CLOSED or UNREACHABLE\n' "$port" "$host"
+        return 1
+    fi
+}
+
+# @name: tcpconns
+# @category: Networking
+# @description: Count and group active TCP network connections by socket state.
+# @os: cross-platform
+alias tcpconns='netstat -an | awk '\''/^tcp/ {print $NF}'\'' | sort | uniq -c | sort -nr'
+
 # ------------------------------------------------------------------------------
 # 🌍 IP Address & Interface Diagnostics
 # ------------------------------------------------------------------------------
@@ -98,6 +136,23 @@ publicip() {
         printf '\n'
     else
         printf 'curl or wget is required to fetch public IP.\n' >&2
+        return 1
+    fi
+}
+
+# @name: publicip6
+# @category: Networking
+# @description: Query and display your external public IPv6 address.
+# @os: cross-platform
+publicip6() {
+    if command -v curl >/dev/null 2>&1; then
+        curl -6 --fail --silent --show-error https://api64.ipify.org 2>/dev/null || {
+            printf 'IPv6 address unavailable.\n' >&2
+            return 1
+        }
+        printf '\n'
+    else
+        printf 'curl is required to fetch IPv6.\n' >&2
         return 1
     fi
 }
@@ -140,6 +195,34 @@ ips() {
 myip() {
     printf '🏠 Local IP:  %s\n' "$(localip)"
     printf '🌍 Public IP: %s\n' "$(publicip 2>/dev/null || printf 'unavailable')"
+}
+
+# @name: gateway
+# @category: Networking
+# @description: Detect and print the IP address of the default gateway router.
+# @os: cross-platform
+gateway() {
+    if [ "${AWESOME_ALIAS_OS:-}" = "macos" ]; then
+        netstat -nr -f inet | awk '$1 == "default" {print $2; exit}'
+    elif command -v ip >/dev/null 2>&1; then
+        ip route show default 2>/dev/null | awk '{print $3; exit}'
+    else
+        netstat -rn 2>/dev/null | awk '$1 == "0.0.0.0" || $1 == "default" {print $2; exit}'
+    fi
+}
+
+# @name: macaddr
+# @category: Networking
+# @description: Print physical MAC hardware addresses for network interfaces.
+# @os: cross-platform
+macaddr() {
+    if [ "${AWESOME_ALIAS_OS:-}" = "macos" ]; then
+        ifconfig | awk '/^[a-z0-9]+:/ {iface=$1} /ether / {print iface, $2}'
+    elif command -v ip >/dev/null 2>&1; then
+        ip link show | awk '/^[0-9]+:/ {iface=$2} /link\/ether/ {print iface, $2}'
+    else
+        ifconfig -a | awk '/^[a-z0-9]+:/ {iface=$1} /ether|HWaddr/ {print iface, $NF}'
+    fi
 }
 
 # @name: routeinfo
@@ -200,8 +283,50 @@ flushdns() {
     fi
 }
 
+# @name: digshort
+# @category: Networking
+# @description: Query DNS records in compact format returning only answer values.
+# @os: cross-platform
+alias digshort='dig +short'
+
+# @name: digall
+# @category: Networking
+# @description: Query DNS records with complete multiline answers without header clutter.
+# @os: cross-platform
+alias digall='dig +noall +answer +multiline'
+
+# @name: digtrace
+# @category: Networking
+# @description: Trace recursive DNS delegation step-by-step from root nameservers.
+# @os: cross-platform
+alias digtrace='dig +trace'
+
+# @name: dnsptr
+# @category: Networking
+# @description: Perform reverse DNS lookup to discover hostname assigned to an IP.
+# @os: cross-platform
+dnsptr() {
+    if [ "$#" -ne 1 ]; then
+        printf 'Usage: dnsptr <ip-address>\n' >&2
+        return 2
+    fi
+    dig -x "$1" +short
+}
+
+# @name: whoisip
+# @category: Networking
+# @description: Query WHOIS details summarizing organization, country, and CIDR range.
+# @os: cross-platform
+whoisip() {
+    if [ "$#" -ne 1 ]; then
+        printf 'Usage: whoisip <ip-address>\n' >&2
+        return 2
+    fi
+    whois "$1" | grep -i -E "^(org-name|orgname|netname|descr|country|cidr|route):"
+}
+
 # ------------------------------------------------------------------------------
-# 🌐 HTTP & API Development Shortcuts
+# 🌐 HTTP & REST API Development Shortcuts
 # ------------------------------------------------------------------------------
 
 # @name: headers
@@ -221,6 +346,44 @@ alias curlv='curl --verbose'
 # @description: Send HTTP request with Accept application/json request header.
 # @os: cross-platform
 alias jsonheader='curl -H "Accept: application/json"'
+
+# @name: httpstatus
+# @category: Networking
+# @description: Query and return only the HTTP response status code for target URL.
+# @os: cross-platform
+httpstatus() {
+    if [ "$#" -lt 1 ]; then
+        printf 'Usage: httpstatus <url>\n' >&2
+        return 2
+    fi
+    curl -s -o /dev/null -w "%{http_code}\n" "$@"
+}
+
+# @name: curltime
+# @category: Networking
+# @description: Measure detailed HTTP timing breakdown including DNS, TCP, TLS, and TTFB.
+# @os: cross-platform
+curltime() {
+    if [ "$#" -lt 1 ]; then
+        printf 'Usage: curltime <url> [curl-options]\n' >&2
+        return 2
+    fi
+
+    local url="$1"
+    shift
+
+    curl -w @- -o /dev/null -s "$@" "$url" <<'EOF'
+   DNS Lookup:  %{time_namelookup}s
+  TCP Connect:  %{time_connect}s
+ TLS Handshake:  %{time_appconnect}s
+ Pre-transfer:  %{time_pretransfer}s
+Start Transfer:  %{time_starttransfer}s
+--------------------------------
+    Total Time:  %{time_total}s
+     HTTP Code:  %{http_code}
+    Speed Down:  %{speed_download} bytes/sec
+EOF
+}
 
 # @name: serve
 # @category: Networking
@@ -258,4 +421,89 @@ serve-lan() {
     python3 -m http.server "$port" \
         --bind 0.0.0.0 \
         --directory "$directory"
+}
+
+# ------------------------------------------------------------------------------
+# 🔐 TLS & SSL Certificate Diagnostics
+# ------------------------------------------------------------------------------
+
+# @name: tlscheck
+# @category: Networking
+# @description: Inspect remote server TLS certificate subject, issuer, and expiry dates.
+# @os: cross-platform
+tlscheck() {
+    if [ "$#" -ne 1 ]; then
+        printf 'Usage: tlscheck <hostname[:port]>\n' >&2
+        return 2
+    fi
+
+    local host="${1%%:*}"
+    local port="${1##*:}"
+
+    if [ "$host" = "$port" ]; then
+        port=443
+    fi
+
+    openssl s_client \
+        -connect "${host}:${port}" \
+        -servername "$host" \
+        </dev/null 2>/dev/null |
+        openssl x509 -noout -subject -issuer -dates -fingerprint
+}
+
+# @name: tlsexpiry
+# @category: Networking
+# @description: Display the exact expiration timestamp for a remote domain TLS certificate.
+# @os: cross-platform
+tlsexpiry() {
+    if [ "$#" -lt 1 ]; then
+        printf 'Usage: tlsexpiry <hostname[:port]>\n' >&2
+        return 2
+    fi
+
+    local host="${1%%:*}"
+    local port="${1##*:}"
+    [ "$host" = "$port" ] && port=443
+
+    local end_date
+    end_date="$(openssl s_client -servername "$host" -connect "${host}:${port}" </dev/null 2>/dev/null | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)"
+
+    if [ -z "$end_date" ]; then
+        printf 'Failed to retrieve certificate from %s:%s\n' "$host" "$port" >&2
+        return 1
+    fi
+
+    printf 'Certificate for %s:%s expires on: %s\n' "$host" "$port" "$end_date"
+}
+
+# @name: tlscertfile
+# @category: Networking
+# @description: Inspect and decode a local X.509 certificate file (.crt or .pem).
+# @os: cross-platform
+tlscertfile() {
+    if [ "$#" -ne 1 ]; then
+        printf 'Usage: tlscertfile <certificate-file>\n' >&2
+        return 2
+    fi
+
+    openssl x509 -in "$1" -noout -text
+}
+
+# @name: opensslver
+# @category: Networking
+# @description: Display OpenSSL version and compilation build platform flags.
+# @os: cross-platform
+alias opensslver='openssl version -a'
+
+# ------------------------------------------------------------------------------
+# ⚡ Bandwidth & Speed Testing
+# ------------------------------------------------------------------------------
+
+# @name: downloadtest
+# @category: Networking
+# @description: Measure internet download throughput rate via Cloudflare edge CDN.
+# @os: cross-platform
+downloadtest() {
+    printf 'Testing download speed via Cloudflare CDN edge...\n'
+    curl -s -w 'Downloaded: %{size_download} bytes\nSpeed: %{speed_download} bytes/sec (~%{speed_download}Bps)\nTotal Time: %{time_total}s\n' -o /dev/null 'https://speed.cloudflare.com/__down?bytes=25000000'
 }
