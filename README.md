@@ -16,7 +16,7 @@ The project focuses on:
 
 > **Principle:** Save keystrokes without hiding important behaviour or making destructive operations dangerously easy.
 
-Website: `https://vikaskyadav.github.io/awesome-bash-alias/`
+Website: `https://ctrlaltvikas.github.io/awesome-bash-alias/`
 
 ---
 
