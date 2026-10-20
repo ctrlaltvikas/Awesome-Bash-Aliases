@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Bash Aliases — Production CLI Productivity Suite</title>
+    <meta name="description" content="Dynamic web catalog and custom bundle builder for Awesome Bash Aliases. 280+ production-grade aliases, safety guards, and container workflows.">
+    
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:title" content="Awesome Bash Aliases — Production CLI Suite">
+    <meta property="og:description" content="Explore, search, and build custom alias bundles from 280+ battle-tested shell commands.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#080b11',
+                        surface: {
+                            DEFAULT: '#0f172a',
+                            subtle: '#131d36',
+                            border: '#1e293b',
+                            hover: '#1e2d4d'
+                        },
+                        cyber: {
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            violet: '#8b5cf6',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.3)',
+                        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.3)',
+                        'glow-card': '0 0 30px -10px rgba(16, 185, 129, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        /* Cyberpunk dot grid background */
+        .cyber-grid {
+            background-size: 32px 32px;
+            background-image: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        /* Subtle glowing gradient accent */
+        .ambient-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.06) 35%, transparent 70%);
+        }
+
+        /* Glassmorphism card surface */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 32px -4px rgba(16, 185, 129, 0.12);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080b11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body class="bg-obsidian text-slate-200 min-h-screen cyber-grid relative font-sans antialiased selection:bg-cyber-emerald selection:text-black"
+      x-data="aliasApp()"
+      x-init="init()"
+      @keydown.window.prevent.slash="focusSearch($event)"
+      @keydown.window.cmd.k="openPalette($event)"
+      @keydown.window.ctrl.k="openPalette($event)"
+      @keydown.escape="closeModals()">
+
+    <!-- Ambient Top Glow -->
+    <div class="ambient-glow absolute top-0 left-0 right-0 h-[600px] pointer-events-none z-0"></div>
+
+    <!-- ====================================================================== -->
+    <!-- 🧭 TOP NAVIGATION BAR                                                  -->
+    <!-- ====================================================================== -->
+    <header class="sticky top-0 z-40 border-b border-surface-border/80 bg-obsidian/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-emerald-500 to-cyan-500 p-[1px] shadow-glow-emerald">
+                    <div class="w-full h-full bg-obsidian rounded-[7px] flex items-center justify-center font-mono font-bold text-cyber-emerald text-base">
+                        &gt;_
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-white text-base tracking-tight font-mono">Awesome Bash Aliases</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold font-mono bg-emerald-500/15 text-cyber-emerald border border-emerald-500/30 rounded-full">v2.0</span>
+                    </div>
+                    <p class="text-xs text-slate-400 hidden sm:block">Modular • Safety-Guarded • DevOps Ready</p>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-3">
+                <!-- Search Button (Cmd+K) -->
+                <button @click="openPalette()" 
+                        class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-subtle/80 hover:bg-surface-hover border border-surface-border text-xs text-slate-300 transition-all shadow-sm group">
+                    <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-cyber-emerald transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <span>Quick find...</span>
+                    <kbd class="px-1.5 py-0.5 text-[10px] bg-slate-900 border border-slate-700 rounded text-slate-400 font-mono">⌘K</kbd>
+                </button>
+
+                <!-- Custom Bundle Drawer Button -->
+                <button @click="isDrawerOpen = true"
+                        class="relative flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all text-xs font-medium"
+                        :class="selectedIds.size > 0 
+                            ? 'bg-emerald-500/15 border-emerald-500/40 text-cyber-emerald hover:bg-emerald-500/25 shadow-glow-emerald' 
+                            : 'bg-surface-subtle border-surface-border text-slate-300 hover:bg-surface-hover'">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                    <span class="hidden sm:inline">Bundle Builder</span>
+                    <span x-show="selectedIds.size > 0" 
+                          x-text="selectedIds.size"
+                          class="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-cyber-emerald text-black"></span>
+                </button>
+
+                <!-- GitHub Repo Star Link -->
+                <a href="https://github.com/vikaskyadav/awesome-bash-alias" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-subtle border border-surface-border hover:border-slate-600 text-xs text-white transition-all">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================== -->
+    <!-- ⚡ HERO SECTION                                                        -->
+    <!-- ====================================================================== -->
+    <section class="relative pt-12 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10 text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-subtle border border-surface-border text-xs text-cyber-cyan mb-6 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-pulse"></span>
+            <span>Dynamic Parser Active • Zero-Maintenance Architecture</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+            Supercharge Your Terminal with 
+            <span class="bg-gradient-to-r from-cyber-emerald via-cyber-cyan to-indigo-400 bg-clip-text text-transparent">
+                Battle-Tested Aliases
+            </span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Curated, modular, and production-grade shortcuts, defensive safety guards, and container workflows for DevOps engineers, sysadmins, and terminal power users.
+        </p>
+
+        <!-- Quick One-Line Install Terminal Box -->
+        <div class="mt-8 max-w-3xl mx-auto">
+            <div class="rounded-xl border border-surface-border bg-slate-950/90 shadow-2xl overflow-hidden backdrop-blur-md">
+                <!-- Mac Terminal Header -->
+                <div class="px-4 py-2.5 bg-slate-900/90 border-b border-surface-border flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                        <span class="ml-2 text-xs font-mono text-slate-400">quick-install.sh</span>
+                    </div>
+                    <!-- Shell Switcher -->
+                    <div class="flex items-center gap-1 bg-slate-950 p-0.5 rounded-md border border-slate-800 text-[11px] font-mono">
+                        <button @click="installShell = 'bash'" 
+                                :class="installShell === 'bash' ? 'bg-surface-border text-cyber-emerald font-bold' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">bash</button>
+                        <button @click="installShell = 'zsh'" 
+                                :class="installShell === 'zsh' ? 'bg-surface-border text-cyber-cyan font-bold' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">zsh</button>
+                    </div>
+                </div>
+
+                <!-- Command Code -->
+                <div class="p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+                    <div class="font-mono text-xs sm:text-sm text-slate-200 overflow-x-auto w-full select-all">
+                        <span class="text-cyber-emerald font-bold">$</span>
+                        <span class="text-cyber-cyan">curl</span> -fsSL https://raw.githubusercontent.com/vikaskyadav/awesome-bash-alias/master/aliases.sh -o ~/.awesome-aliases.sh &amp;&amp; echo <span class="text-amber-300" x-text="installShell === 'bash' ? '\'source ~/.awesome-aliases.sh\' >> ~/.bashrc' : '\'source ~/.awesome-aliases.sh\' >> ~/.zshrc'"></span>
+                    </div>
+                    <button @click="copyInstallCommand()" 
+                            class="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-cyber-emerald border border-emerald-500/40 font-mono text-xs font-semibold transition-all shadow-glow-emerald">
+                        <svg x-show="!copiedInstall" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        <svg x-show="copiedInstall" class="w-4 h-4 text-cyber-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span x-text="copiedInstall ? 'Copied! ✨' : 'Copy Command'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Live Stat Counters -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <div class="glass-card rounded-xl p-4 border border-surface-border text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono" x-text="aliases.length || '280+'"></div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">Documented Aliases</div>
+            </div>
+            <div class="glass-card rounded-xl p-4 border border-surface-border text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-cyber-emerald font-mono" x-text="categories.length || '6'"></div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">Domain Modules</div>
+            </div>
+            <div class="glass-card rounded-xl p-4 border border-surface-border text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-cyber-cyan font-mono">100%</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">Safety Guarded</div>
+            </div>
+            <div class="glass-card rounded-xl p-4 border border-surface-border text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-indigo-400 font-mono">0ms</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">Dynamic JS Parse</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+    <!-- 🔍 FILTER CONTROLS & SEARCH                                            -->
+    <!-- ====================================================================== -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 z-10 relative">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-surface-border shadow-xl">
+            
+            <!-- Global Search Bar Input -->
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input id="mainSearchInput"
+                       type="text" 
+                       x-model="searchQuery" 
+                       placeholder="Search commands (e.g. 'dockerclean', 'git log', 'killport', 'k8s pods', 'du')... [Press '/' to focus]" 
+                       class="w-full pl-12 pr-28 py-3.5 bg-slate-950/80 rounded-xl border border-surface-border focus:border-cyber-emerald focus:ring-1 focus:ring-cyber-emerald text-sm sm:text-base text-white placeholder-slate-500 font-mono transition-all outline-none">
+                
+                <!-- Clear Button & Result Count -->
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-2">
+                    <button x-show="searchQuery" 
+                            @click="searchQuery = ''" 
+                            class="text-slate-400 hover:text-white p-1 text-xs">
+                        ✕
+                    </button>
+                    <span class="px-2 py-1 text-xs font-mono rounded bg-slate-800 text-slate-300" 
+                          x-text="filteredAliases.length + ' results'"></span>
+                </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="mt-5 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                <button @click="selectedCategory = 'all'" 
+                        :class="selectedCategory === 'all' 
+                            ? 'bg-cyber-emerald text-black font-bold shadow-glow-emerald' 
+                            : 'bg-surface-subtle text-slate-300 hover:bg-surface-hover border border-surface-border'"
+                        class="px-3.5 py-1.5 rounded-lg text-xs font-mono flex items-center gap-2 whitespace-nowrap transition-all">
+                    <span>⚡ All</span>
+                    <span class="px-1.5 py-0.2 rounded-full text-[10px]"
+                          :class="selectedCategory === 'all' ? 'bg-black/20 text-black' : 'bg-slate-800 text-slate-400'"
+                          x-text="aliases.length"></span>
+                </button>
+
+                <template x-for="cat in categories" :key="cat.name">
+                    <button @click="selectedCategory = cat.name" 
+                            :class="selectedCategory === cat.name 
+                                ? 'bg-cyber-emerald text-black font-bold shadow-glow-emerald' 
+                                : 'bg-surface-subtle text-slate-300 hover:bg-surface-hover border border-surface-border'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-mono flex items-center gap-2 whitespace-nowrap transition-all">
+                        <span x-text="cat.emoji + ' ' + cat.name"></span>
+                        <span class="px-1.5 py-0.2 rounded-full text-[10px]"
+                              :class="selectedCategory === cat.name ? 'bg-black/20 text-black' : 'bg-slate-800 text-slate-400'"
+                              x-text="getCategoryCount(cat.name)"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Secondary Controls (OS Filter & Custom Selection Tools) -->
+            <div class="mt-4 pt-4 border-t border-surface-border/60 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <!-- OS Filter -->
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-mono">Platform:</span>
+                    <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-surface-border font-mono">
+                        <button @click="selectedOS = 'all'" 
+                                :class="selectedOS === 'all' ? 'bg-surface-border text-white' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">All OS</button>
+                        <button @click="selectedOS = 'cross-platform'" 
+                                :class="selectedOS === 'cross-platform' ? 'bg-surface-border text-white' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">🌐 Cross-Platform</button>
+                        <button @click="selectedOS = 'linux'" 
+                                :class="selectedOS === 'linux' ? 'bg-surface-border text-white' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">🐧 Linux</button>
+                        <button @click="selectedOS = 'macos'" 
+                                :class="selectedOS === 'macos' ? 'bg-surface-border text-white' : 'text-slate-400 hover:text-white'"
+                                class="px-2 py-0.5 rounded transition-colors">🍏 macOS</button>
+                    </div>
+                </div>
+
+                <!-- Selection Helpers -->
+                <div class="flex items-center gap-2">
+                    <button @click="selectAllFiltered()" 
+                            class="px-2.5 py-1 rounded bg-surface-subtle hover:bg-surface-hover border border-surface-border text-slate-300 font-mono transition-colors">
+                        Select All Visible (<span x-text="filteredAliases.length"></span>)
+                    </button>
+                    <button x-show="selectedIds.size > 0" 
+                            @click="clearSelection()" 
+                            class="px-2.5 py-1 rounded bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 font-mono transition-colors">
+                        Clear Selected (<span x-text="selectedIds.size"></span>)
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+    <!-- 📦 ALIASES GRID DISPLAY                                                -->
+    <!-- ====================================================================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pb-24 z-10 relative">
+
+        <!-- Loading Skeleton -->
+        <div x-show="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <template x-for="i in 6" :key="i">
+                <div class="glass-card rounded-xl p-5 border border-surface-border animate-pulse h-48 flex flex-col justify-between">
+                    <div class="flex justify-between items-center">
+                        <div class="h-4 w-24 bg-slate-800 rounded"></div>
+                        <div class="h-4 w-12 bg-slate-800 rounded"></div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-5 w-36 bg-slate-700 rounded"></div>
+                        <div class="h-3 w-full bg-slate-800 rounded"></div>
+                        <div class="h-3 w-4/5 bg-slate-800 rounded"></div>
+                    </div>
+                    <div class="h-8 w-full bg-slate-900 rounded"></div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Empty State -->
+        <div x-show="!loading && filteredAliases.length === 0" 
+             x-cloak 
+             class="text-center py-20 glass-card rounded-2xl border border-surface-border">
+            <div class="text-4xl mb-3">🔍</div>
+            <h3 class="text-lg font-bold text-white font-mono">No matching aliases found</h3>
+            <p class="text-sm text-slate-400 mt-1 max-w-sm mx-auto">Try adjusting your search terms or clearing OS and category filters.</p>
+            <button @click="searchQuery = ''; selectedCategory = 'all'; selectedOS = 'all'" 
+                    class="mt-4 px-4 py-2 rounded-lg bg-emerald-500/20 text-cyber-emerald border border-emerald-500/30 font-mono text-xs font-semibold hover:bg-emerald-500/30 transition-all">
+                Reset All Filters
+            </button>
+        </div>
+
+        <!-- Alias Cards Grid -->
+        <div x-show="!loading && filteredAliases.length > 0" 
+             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            
+            <template x-for="item in filteredAliases" :key="item.id">
+                <div class="glass-card rounded-xl p-4 sm:p-5 flex flex-col justify-between transition-all duration-200 group relative border"
+                     :class="isSelected(item.id) ? 'border-cyber-emerald shadow-glow-emerald bg-slate-900/90' : 'border-surface-border'">
+
+                    <!-- Card Header (Category, OS, Checkbox) -->
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <!-- Category Badge -->
+                                <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold"
+                                      :class="getCategoryBadgeClass(item.category)"
+                                      x-text="item.category"></span>
+
+                                <!-- OS Tag -->
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono border"
+                                      :class="getOSBadgeClass(item.os)"
+                                      x-text="getOSLabel(item.os)"></span>
+
+                                <!-- Type Tag -->
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-400 border border-slate-700"
+                                      x-text="item.type"></span>
+                            </div>
+
+                            <!-- Bundle Selection Checkbox -->
+                            <button @click="toggleSelect(item.id)" 
+                                    :title="isSelected(item.id) ? 'Remove from custom bundle' : 'Add to custom bundle'"
+                                    class="w-6 h-6 rounded border flex items-center justify-center transition-all"
+                                    :class="isSelected(item.id) 
+                                        ? 'bg-cyber-emerald border-cyber-emerald text-black shadow-sm' 
+                                        : 'border-slate-700 hover:border-slate-500 bg-slate-900 text-transparent'">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Command Name -->
+                        <div class="flex items-baseline gap-2">
+                            <h3 class="font-mono text-base sm:text-lg font-bold text-white group-hover:text-cyber-emerald transition-colors tracking-tight select-all"
+                                x-text="item.name"></h3>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-2"
+                           :title="item.description"
+                           x-text="item.description"></p>
+                    </div>
+
+                    <!-- Command Box & Action Footer -->
+                    <div class="mt-4 pt-3 border-t border-surface-border/60">
+                        <div class="relative bg-slate-950/90 rounded-lg p-3 font-mono text-xs border border-slate-800/80 group-hover:border-slate-700 transition-colors">
+                            <div class="flex items-start justify-between gap-2 overflow-x-auto">
+                                <div class="text-slate-300 break-all select-all">
+                                    <span class="text-cyber-emerald select-none font-bold">$ </span>
+                                    <span x-text="item.type === 'alias' ? item.raw : (item.name + '() { ... }')"></span>
+                                </div>
+                                <button @click="copyCommand(item.raw, item.name)" 
+                                        title="Copy to clipboard"
+                                        class="shrink-0 p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Multi-line function expanded view toggle -->
+                            <template x-if="item.type === 'function'">
+                                <div class="mt-2 pt-2 border-t border-slate-800/80">
+                                    <button @click="toggleExpandFunction(item.id)" 
+                                            class="text-[11px] text-cyber-cyan hover:underline flex items-center gap-1 font-mono">
+                                        <span x-text="isFunctionExpanded(item.id) ? 'Hide implementation ▴' : 'View full function implementation ▾'"></span>
+                                    </button>
+                                    <div x-show="isFunctionExpanded(item.id)" x-cloak class="mt-2 max-h-48 overflow-y-auto">
+                                        <pre class="text-[11px] text-emerald-400 bg-slate-950 p-2 rounded border border-slate-800 font-mono select-all" x-text="item.raw"></pre>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Card Sub-Footer info -->
+                        <div class="mt-2 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                            <span x-text="item.file.replace('aliases/', '')"></span>
+                            <span class="hover:text-cyber-emerald cursor-pointer" @click="copyCommand(item.raw, item.name)">Click to copy 📋</span>
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+
+        </div>
+    </main>
+
+    <!-- ====================================================================== -->
+    <!-- 🎛️ CUSTOM BUNDLE BUILDER / EXPORT DRAWER                               -->
+    <!-- ====================================================================== -->
+    <div x-show="isDrawerOpen" 
+         x-cloak 
+         class="fixed inset-0 z-50 overflow-hidden" 
+         role="dialog" 
+         aria-modal="true">
+        
+        <!-- Backdrop -->
+        <div @click="isDrawerOpen = false" 
+             class="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-xl bg-obsidian border-l border-surface-border shadow-2xl flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 border-b border-surface-border bg-slate-900/60 flex items-center justify-between">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-white font-mono">Custom Alias Bundle</span>
+                            <span class="px-2 py-0.5 text-xs font-bold font-mono bg-cyber-emerald text-black rounded-full"
+                                  x-text="selectedIds.size + ' selected'"></span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Export your handpicked collection into a ready-to-source file.</p>
+                    </div>
+                    <button @click="isDrawerOpen = false" class="text-slate-400 hover:text-white p-2">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Drawer Content -->
+                <div class="p-6 overflow-y-auto flex-1 space-y-6">
+                    
+                    <!-- Empty State in Drawer -->
+                    <div x-show="selectedIds.size === 0" class="text-center py-12">
+                        <div class="text-4xl mb-3">📦</div>
+                        <h4 class="text-base font-bold text-white font-mono">No commands selected yet</h4>
+                        <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Click the checkbox on any alias card to bundle it into your custom profile.</p>
+                        <button @click="selectAllFiltered(); isDrawerOpen = false" 
+                                class="mt-4 px-4 py-2 rounded-lg bg-cyber-emerald text-black font-mono text-xs font-bold hover:bg-emerald-400 transition-all">
+                            Select All Currently Filtered
+                        </button>
+                    </div>
+
+                    <div x-show="selectedIds.size > 0">
+                        <!-- Preview Tabs -->
+                        <div class="flex items-center gap-2 border-b border-surface-border pb-2 text-xs font-mono">
+                            <button @click="bundleTab = 'script'" 
+                                    :class="bundleTab === 'script' ? 'text-cyber-emerald border-b-2 border-cyber-emerald font-bold' : 'text-slate-400 hover:text-white'"
+                                    class="pb-1 px-1">Bash Script Preview</button>
+                            <button @click="bundleTab = 'list'" 
+                                    :class="bundleTab === 'list' ? 'text-cyber-emerald border-b-2 border-cyber-emerald font-bold' : 'text-slate-400 hover:text-white'"
+                                    class="pb-1 px-1">Selected List (<span x-text="selectedIds.size"></span>)</button>
+                        </div>
+
+                        <!-- Tab 1: Script Preview -->
+                        <div x-show="bundleTab === 'script'" class="mt-4">
+                            <pre class="bg-slate-950 p-4 rounded-xl border border-surface-border font-mono text-xs text-emerald-400 max-h-96 overflow-y-auto select-all" 
+                                 x-text="generateBundleScript()"></pre>
+                        </div>
+
+                        <!-- Tab 2: Selected List -->
+                        <div x-show="bundleTab === 'list'" class="mt-4 space-y-2 max-h-96 overflow-y-auto">
+                            <template x-for="item in getSelectedItems()" :key="item.id">
+                                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900 border border-surface-border text-xs font-mono">
+                                    <div>
+                                        <span class="font-bold text-white" x-text="item.name"></span>
+                                        <span class="text-slate-400 ml-2" x-text="'(' + item.category + ')'"></span>
+                                    </div>
+                                    <button @click="toggleSelect(item.id)" class="text-rose-400 hover:text-rose-300 px-2 py-0.5">Remove</button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Drawer Footer Actions -->
+                <div class="p-6 border-t border-surface-border bg-slate-900/60 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <button @click="downloadBundle()" 
+                                :disabled="selectedIds.size === 0"
+                                class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-cyber-emerald hover:bg-emerald-400 disabled:opacity-40 disabled:hover:bg-cyber-emerald text-black font-mono font-bold text-xs transition-all shadow-glow-emerald">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>Download .bash</span>
+                        </button>
+
+                        <button @click="copyBundleScript()" 
+                                :disabled="selectedIds.size === 0"
+                                class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-hover border border-surface-border text-white font-mono font-bold text-xs transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
+                            <span>Copy Script</span>
+                        </button>
+                    </div>
+
+                    <button @click="clearSelection()" 
+                            x-show="selectedIds.size > 0" 
+                            class="w-full py-1.5 text-center text-xs font-mono text-slate-500 hover:text-slate-300">
+                        Clear all selections
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- ⌘ COMMAND PALETTE MODAL (Cmd+K / /)                                    -->
+    <!-- ====================================================================== -->
+    <div x-show="isPaletteOpen" 
+         x-cloak 
+         class="fixed inset-0 z-50 overflow-y-auto p-4 sm:p-6 md:p-20 flex justify-center items-start"
+         role="dialog" 
+         aria-modal="true">
+        
+        <!-- Backdrop -->
+        <div @click="isPaletteOpen = false" 
+             class="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"></div>
+
+        <!-- Palette Modal Box -->
+        <div class="relative w-full max-w-2xl bg-slate-950 border border-surface-border rounded-2xl shadow-2xl overflow-hidden font-mono z-10"
+             @keydown.arrow-down.prevent="navigatePalette(1)"
+             @keydown.arrow-up.prevent="navigatePalette(-1)"
+             @keydown.enter.prevent="executePaletteSelection()">
+            
+            <!-- Input Header -->
+            <div class="flex items-center px-4 border-b border-surface-border bg-slate-900/60">
+                <svg class="w-5 h-5 text-cyber-emerald mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input id="paletteInput"
+                       type="text" 
+                       x-model="paletteQuery" 
+                       placeholder="Type a command or keyword to search and copy..." 
+                       class="w-full py-4 bg-transparent text-white text-sm focus:outline-none placeholder-slate-500 font-mono">
+                <kbd class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-400 rounded border border-slate-700">ESC</kbd>
+            </div>
+
+            <!-- Results List -->
+            <div class="max-h-96 overflow-y-auto p-2 divide-y divide-slate-900">
+                <template x-for="(item, idx) in paletteResults" :key="item.id">
+                    <div @click="copyCommand(item.raw, item.name); isPaletteOpen = false"
+                         @mouseenter="paletteIndex = idx"
+                         :class="paletteIndex === idx ? 'bg-emerald-500/15 border-emerald-500/30' : 'hover:bg-slate-900 border-transparent'"
+                         class="p-3 rounded-xl border cursor-pointer flex items-center justify-between gap-3 transition-colors">
+                        <div class="overflow-hidden">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white text-sm" x-text="item.name"></span>
+                                <span class="px-1.5 py-0.2 rounded text-[10px]" 
+                                      :class="getCategoryBadgeClass(item.category)" 
+                                      x-text="item.category"></span>
+                                <span class="text-[10px] text-slate-500" x-text="item.os"></span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1 truncate" x-text="item.description"></p>
+                        </div>
+                        <div class="shrink-0 flex items-center gap-2 text-xs text-cyber-emerald font-mono">
+                            <span class="hidden sm:inline text-slate-500 font-mono text-[10px]">Enter to copy</span>
+                            <span>↵</span>
+                        </div>
+                    </div>
+                </template>
+
+                <div x-show="paletteResults.length === 0" class="py-12 text-center text-slate-500 text-xs">
+                    No matching commands found for "<span x-text="paletteQuery"></span>"
+                </div>
+            </div>
+
+            <!-- Footer Keyboard Hints -->
+            <div class="px-4 py-2.5 bg-slate-900/90 border-t border-surface-border flex items-center justify-between text-[11px] text-slate-400">
+                <div class="flex items-center gap-3">
+                    <span><kbd class="bg-slate-800 px-1 py-0.5 rounded text-white text-[10px]">↑↓</kbd> Navigate</span>
+                    <span><kbd class="bg-slate-800 px-1 py-0.5 rounded text-white text-[10px]">↵</kbd> Copy</span>
+                    <span><kbd class="bg-slate-800 px-1 py-0.5 rounded text-white text-[10px]">Esc</kbd> Close</span>
+                </div>
+                <span class="text-cyber-cyan" x-text="paletteResults.length + ' matches'"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- 🔔 FLOATING TOAST NOTIFICATIONS                                        -->
+    <!-- ====================================================================== -->
+    <div x-show="toast.show" 
+         x-cloak 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
+         class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/95 border border-cyber-emerald/50 text-white font-mono text-xs shadow-glow-emerald backdrop-blur-md">
+        <span class="text-cyber-emerald text-base">✨</span>
+        <span x-text="toast.message"></span>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- 🧠 DYNAMIC JSDOC PARSER & REACTIVE STATE LOGIC                        -->
+    <!-- ====================================================================== -->
+    <script>
+        // List of core alias modules in deterministic load order
+        const CORE_MODULE_FILES = [
+            'aliases/00-core.aliases.bash',
+            'aliases/10-git.aliases.bash',
+            'aliases/20-docker.aliases.bash',
+            'aliases/30-k8s.aliases.bash',
+            'aliases/40-net.aliases.bash',
+            'aliases/50-sys.aliases.bash'
+        ];
+
+        // Known Category definitions with cyber aesthetics
+        const CATEGORY_MAP = [
+            { name: 'Core', emoji: '🧰', color: 'emerald' },
+            { name: 'Git', emoji: '🌿', color: 'orange' },
+            { name: 'Docker', emoji: '🐳', color: 'sky' },
+            { name: 'Kubernetes', emoji: '☸️', color: 'indigo' },
+            { name: 'Networking', emoji: '🌐', color: 'cyan' },
+            { name: 'System', emoji: '🖥️', color: 'purple' }
+        ];
+
+        function aliasApp() {
+            return {
+                aliases: [],
+                categories: CATEGORY_MAP,
+                loading: true,
+                searchQuery: '',
+                selectedCategory: 'all',
+                selectedOS: 'all',
+                selectedIds: new Set(),
+                isDrawerOpen: false,
+                bundleTab: 'script',
+                isPaletteOpen: false,
+                paletteQuery: '',
+                paletteIndex: 0,
+                copiedInstall: false,
+                installShell: 'bash',
+                expandedFunctions: new Set(),
+                toast: { show: false, message: '' },
+
+                async init() {
+                    try {
+                        await this.loadAllAliases();
+                    } catch (err) {
+                        console.error('Initialization error:', err);
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                // -------------------------------------------------------------
+                // Dynamic Auto-Discovery & JSDoc Bash Parser
+                // -------------------------------------------------------------
+                async loadAllAliases() {
+                    let filesToFetch = CORE_MODULE_FILES;
+
+                    // 1. Attempt dynamic auto-discovery of newly added .aliases.bash files via GitHub API
+                    try {
+                        const apiRes = await fetch('https://api.github.com/repos/vikaskyadav/awesome-bash-alias/contents/aliases');
+                        if (apiRes.ok) {
+                            const repoContents = await apiRes.json();
+                            if (Array.isArray(repoContents)) {
+                                const discovered = repoContents
+                                    .filter(item => item.name.endsWith('.aliases.bash'))
+                                    .map(item => item.path)
+                                    .sort();
+                                if (discovered.length > 0) {
+                                    filesToFetch = discovered;
+                                    console.log('⚡ Dynamically discovered alias files via GitHub API:', filesToFetch);
+                                }
+                            }
+                        }
+                    } catch (apiErr) {
+                        console.warn('GitHub API discovery skipped (offline or rate limited). Falling back to local manifest.', apiErr);
+                    }
+
+                    // 2. Fetch and parse each raw .aliases.bash file in parallel
+                    let parsedResults = [];
+                    let fetchSuccess = false;
+
+                    try {
+                        const fetchPromises = filesToFetch.map(async (filepath) => {
+                            try {
+                                const res = await fetch(filepath);
+                                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                                const text = await res.text();
+                                return this.parseBashContent(text, filepath);
+                            } catch (e) {
+                                console.warn(`Could not fetch ${filepath}:`, e);
+                                return [];
+                            }
+                        });
+
+                        const fileArrays = await Promise.all(fetchPromises);
+                        parsedResults = fileArrays.flat();
+                        if (parsedResults.length > 0) {
+                            fetchSuccess = true;
+                        }
+                    } catch (fetchErr) {
+                        console.warn('Raw file fetching failed:', fetchErr);
+                    }
+
+                    // 3. Fallback to metadata.json if raw file fetch was restricted (e.g. CORS on file:// protocol)
+                    if (!fetchSuccess || parsedResults.length === 0) {
+                        try {
+                            const metaRes = await fetch('metadata.json');
+                            if (metaRes.ok) {
+                                const metaData = await metaRes.json();
+                                parsedResults = metaData.map((item, idx) => ({
+                                    ...item,
+                                    raw: item.command ? `alias ${item.name}='${item.command}'` : `${item.name}() { ... }`,
+                                    id: `${item.category}-${item.name}-${idx}`
+                                }));
+                                console.log('Loaded fallback from metadata.json:', parsedResults.length);
+                            }
+                        } catch (metaErr) {
+                            console.error('All data loading mechanisms failed:', metaErr);
+                        }
+                    }
+
+                    this.aliases = parsedResults;
+                },
+
+                // Robust State-Machine Parser for structured JSDoc Bash format
+                parseBashContent(content, filePath) {
+                    const lines = content.split('\n');
+                    const items = [];
+                    let currentMeta = null;
+                    let inFunction = false;
+                    let functionLines = [];
+
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        const trimmed = line.trim();
+
+                        // Match beginning of JSDoc Bash metadata block
+                        if (trimmed.startsWith('# @name:')) {
+                            currentMeta = {
+                                name: trimmed.replace('# @name:', '').trim(),
+                                category: 'Core',
+                                description: '',
+                                os: 'cross-platform',
+                                file: filePath
+                            };
+                            continue;
+                        }
+
+                        if (currentMeta) {
+                            if (trimmed.startsWith('# @category:')) {
+                                currentMeta.category = trimmed.replace('# @category:', '').trim();
+                                continue;
+                            }
+                            if (trimmed.startsWith('# @description:')) {
+                                currentMeta.description = trimmed.replace('# @description:', '').trim();
+                                continue;
+                            }
+                            if (trimmed.startsWith('# @os:')) {
+                                currentMeta.os = trimmed.replace('# @os:', '').trim();
+                                continue;
+                            }
+
+                            // Match single-line Alias definition
+                            if (trimmed.startsWith('alias ') && trimmed.includes('=')) {
+                                const equalIdx = trimmed.indexOf('=');
+                                const aliasName = trimmed.slice(6, equalIdx).trim();
+                                const aliasCmd = trimmed.slice(equalIdx + 1).trim();
+
+                                items.push({
+                                    ...currentMeta,
+                                    type: 'alias',
+                                    raw: trimmed,
+                                    command: aliasCmd.replace(/^['"]|['"]$/g, ''),
+                                    id: `${currentMeta.category}-${currentMeta.name}-${items.length}`
+                                });
+                                currentMeta = null;
+                                continue;
+                            }
+
+                            // Match start of Function definition
+                            const funcMatch = trimmed.match(/^([a-zA-Z0-9_\-\.]+)\s*\(\)\s*\{/);
+                            if (funcMatch) {
+                                inFunction = true;
+                                functionLines = [line];
+                                // Single-line function definition
+                                if (trimmed.endsWith('}') && trimmed.length > funcMatch[0].length) {
+                                    items.push({
+                                        ...currentMeta,
+                                        type: 'function',
+                                        raw: trimmed,
+                                        command: trimmed,
+                                        id: `${currentMeta.category}-${currentMeta.name}-${items.length}`
+                                    });
+                                    inFunction = false;
+                                    functionLines = [];
+                                    currentMeta = null;
+                                }
+                                continue;
+                            }
+                        }
+
+                        // Collect multi-line function body
+                        if (inFunction) {
+                            functionLines.push(line);
+                            if (trimmed === '}' || line.startsWith('}')) {
+                                const fullFunction = functionLines.join('\n');
+                                items.push({
+                                    ...currentMeta,
+                                    type: 'function',
+                                    raw: fullFunction,
+                                    command: fullFunction,
+                                    id: `${currentMeta.category}-${currentMeta.name}-${items.length}`
+                                });
+                                inFunction = false;
+                                functionLines = [];
+                                currentMeta = null;
+                            }
+                        }
+                    }
+
+                    return items;
+                },
+
+                // -------------------------------------------------------------
+                // Filtering & Search
+                // -------------------------------------------------------------
+                get filteredAliases() {
+                    const q = this.searchQuery.toLowerCase().trim();
+                    return this.aliases.filter(item => {
+                        // Category filter
+                        if (this.selectedCategory !== 'all' && item.category !== this.selectedCategory) {
+                            return false;
+                        }
+                        // OS filter
+                        if (this.selectedOS !== 'all' && item.os !== this.selectedOS) {
+                            return false;
+                        }
+                        // Search text query
+                        if (q) {
+                            return item.name.toLowerCase().includes(q) ||
+                                   item.description.toLowerCase().includes(q) ||
+                                   item.category.toLowerCase().includes(q) ||
+                                   (item.command && item.command.toLowerCase().includes(q)) ||
+                                   item.raw.toLowerCase().includes(q);
+                        }
+                        return true;
+                    });
+                },
+
+                get paletteResults() {
+                    const q = this.paletteQuery.toLowerCase().trim();
+                    if (!q) {
+                        return this.aliases.slice(0, 10);
+                    }
+                    return this.aliases
+                        .filter(item => 
+                            item.name.toLowerCase().includes(q) ||
+                            item.description.toLowerCase().includes(q) ||
+                            item.category.toLowerCase().includes(q)
+                        )
+                        .slice(0, 15);
+                },
+
+                getCategoryCount(categoryName) {
+                    return this.aliases.filter(a => a.category === categoryName).length;
+                },
+
+                // -------------------------------------------------------------
+                // Custom Bundle Builder
+                // -------------------------------------------------------------
+                toggleSelect(id) {
+                    if (this.selectedIds.has(id)) {
+                        this.selectedIds.delete(id);
+                    } else {
+                        this.selectedIds.add(id);
+                    }
+                    // Trigger Alpine reactivity by assigning a new Set instance
+                    this.selectedIds = new Set(this.selectedIds);
+                },
+
+                isSelected(id) {
+                    return this.selectedIds.has(id);
+                },
+
+                selectAllFiltered() {
+                    this.filteredAliases.forEach(item => this.selectedIds.add(item.id));
+                    this.selectedIds = new Set(this.selectedIds);
+                    this.triggerToast(`Selected ${this.filteredAliases.length} commands for custom bundle.`);
+                },
+
+                clearSelection() {
+                    this.selectedIds = new Set();
+                    this.triggerToast('Cleared all custom selections.');
+                },
+
+                getSelectedItems() {
+                    return this.aliases.filter(a => this.selectedIds.has(a.id));
+                },
+
+                generateBundleScript() {
+                    const selected = this.getSelectedItems();
+                    if (selected.length === 0) return '# No commands selected.';
+
+                    let script = `#!/usr/bin/env bash\n`;
+                    script += `# ==============================================================================\n`;
+                    script += `# 🚀 Custom Bash Aliases Bundle\n`;
+                    script += `# Generated on: ${new Date().toISOString().split('T')[0]}\n`;
+                    script += `# Total Commands: ${selected.length}\n`;
+                    script += `# Website: https://vikaskyadav.github.io/awesome-bash-alias/\n`;
+                    script += `# ==============================================================================\n\n`;
+                    script += `shopt -s expand_aliases 2>/dev/null || true\n\n`;
+
+                    // Group by category
+                    const grouped = {};
+                    selected.forEach(item => {
+                        grouped[item.category] = grouped[item.category] || [];
+                        grouped[item.category].push(item);
+                    });
+
+                    for (const [category, items] of Object.entries(grouped)) {
+                        script += `# --- ${category.toUpperCase()} ---------------------------------------------------\n`;
+                        items.forEach(item => {
+                            script += `# ${item.description} (${item.os})\n`;
+                            script += `${item.raw}\n\n`;
+                        });
+                    }
+
+                    return script;
+                },
+
+                downloadBundle() {
+                    const script = this.generateBundleScript();
+                    const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'custom-aliases.bash';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    this.triggerToast('Downloaded custom-aliases.bash! 📥');
+                },
+
+                copyBundleScript() {
+                    const script = this.generateBundleScript();
+                    navigator.clipboard.writeText(script).then(() => {
+                        this.triggerToast('Custom bundle script copied to clipboard! 📋');
+                    });
+                },
+
+                // -------------------------------------------------------------
+                // Command Copying & Navigation Helpers
+                // -------------------------------------------------------------
+                copyCommand(rawText, name) {
+                    navigator.clipboard.writeText(rawText).then(() => {
+                        this.triggerToast(`Copied "${name}" to clipboard! 📋`);
+                    });
+                },
+
+                copyInstallCommand() {
+                    const cmd = `curl -fsSL https://raw.githubusercontent.com/vikaskyadav/awesome-bash-alias/master/aliases.sh -o ~/.awesome-aliases.sh && echo 'source ~/.awesome-aliases.sh' >> ~/.${this.installShell}rc`;
+                    navigator.clipboard.writeText(cmd).then(() => {
+                        this.copiedInstall = true;
+                        this.triggerToast('Install command copied! 🚀');
+                        setTimeout(() => this.copiedInstall = false, 2500);
+                    });
+                },
+
+                toggleExpandFunction(id) {
+                    if (this.expandedFunctions.has(id)) {
+                        this.expandedFunctions.delete(id);
+                    } else {
+                        this.expandedFunctions.add(id);
+                    }
+                    this.expandedFunctions = new Set(this.expandedFunctions);
+                },
+
+                isFunctionExpanded(id) {
+                    return this.expandedFunctions.has(id);
+                },
+
+                focusSearch(event) {
+                    const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+                    if (activeTag !== 'input' && activeTag !== 'textarea') {
+                        event.preventDefault();
+                        const input = document.getElementById('mainSearchInput');
+                        if (input) {
+                            input.focus();
+                            input.select();
+                        }
+                    }
+                },
+
+                openPalette(event) {
+                    if (event) event.preventDefault();
+                    this.isPaletteOpen = true;
+                    this.paletteQuery = '';
+                    this.paletteIndex = 0;
+                    setTimeout(() => {
+                        const pInput = document.getElementById('paletteInput');
+                        if (pInput) pInput.focus();
+                    }, 50);
+                },
+
+                closeModals() {
+                    this.isPaletteOpen = false;
+                    this.isDrawerOpen = false;
+                },
+
+                navigatePalette(delta) {
+                    const total = this.paletteResults.length;
+                    if (total === 0) return;
+                    this.paletteIndex = (this.paletteIndex + delta + total) % total;
+                },
+
+                executePaletteSelection() {
+                    const results = this.paletteResults;
+                    if (results.length > 0 && results[this.paletteIndex]) {
+                        const item = results[this.paletteIndex];
+                        this.copyCommand(item.raw, item.name);
+                        this.isPaletteOpen = false;
+                    }
+                },
+
+                triggerToast(message) {
+                    this.toast.message = message;
+                    this.toast.show = true;
+                    clearTimeout(this.toastTimer);
+                    this.toastTimer = setTimeout(() => {
+                        this.toast.show = false;
+                    }, 2800);
+                },
+
+                // -------------------------------------------------------------
+                // UI Aesthetic Badges
+                // -------------------------------------------------------------
+                getCategoryBadgeClass(category) {
+                    switch (category) {
+                        case 'Core': return 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+                        case 'Git': return 'bg-orange-500/15 text-orange-400 border border-orange-500/30';
+                        case 'Docker': return 'bg-sky-500/15 text-sky-400 border border-sky-500/30';
+                        case 'Kubernetes': return 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/30';
+                        case 'Networking': return 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30';
+                        case 'System': return 'bg-purple-500/15 text-purple-400 border border-purple-500/30';
+                        default: return 'bg-slate-800 text-slate-300 border border-slate-700';
+                    }
+                },
+
+                getOSBadgeClass(os) {
+                    switch (os) {
+                        case 'linux': return 'bg-amber-500/10 text-amber-300 border-amber-500/20';
+                        case 'macos': return 'bg-slate-700/50 text-slate-200 border-slate-600';
+                        default: return 'bg-blue-500/10 text-blue-300 border-blue-500/20';
+                    }
+                },
+
+                getOSLabel(os) {
+                    switch (os) {
+                        case 'linux': return '🐧 linux';
+                        case 'macos': return '🍏 macos';
+                        default: return '🌐 cross-platform';
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>

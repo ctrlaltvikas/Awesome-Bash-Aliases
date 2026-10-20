@@ -1,0 +1,2540 @@
+[
+  {
+    "name": "has",
+    "category": "Core",
+    "description": "Check if a command or binary exists in the current system PATH.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "..",
+    "category": "Core",
+    "description": "Navigate one directory level up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd ..",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "...",
+    "category": "Core",
+    "description": "Navigate two directory levels up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd ../..",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "....",
+    "category": "Core",
+    "description": "Navigate three directory levels up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd ../../..",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": ".....",
+    "category": "Core",
+    "description": "Navigate four directory levels up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd ../../../..",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "......",
+    "category": "Core",
+    "description": "Navigate five directory levels up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd ../../../../..",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "home",
+    "category": "Core",
+    "description": "Change to user home directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd \"${HOME}",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "root",
+    "category": "Core",
+    "description": "Change to root filesystem directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cd /",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "mkcd",
+    "category": "Core",
+    "description": "Create directory path recursively and navigate directly into it.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "croot",
+    "category": "Core",
+    "description": "Navigate to the root directory of the current Git repository.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "up",
+    "category": "Core",
+    "description": "Navigate upward by a specified number of directory levels (default 1).",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "c",
+    "category": "Core",
+    "description": "Clear the terminal screen display.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "clear",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "cls",
+    "category": "Core",
+    "description": "Clear the terminal screen display and list directory contents.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "clear; ls",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "reload",
+    "category": "Core",
+    "description": "Quickly source and reload the active shell configuration file.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "source \"${HOME}/.${SHELL##*/}rc",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "reload-shell",
+    "category": "Core",
+    "description": "Safely reload the shell configuration profile with shell and file validation.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "path",
+    "category": "Core",
+    "description": "Pretty-print system PATH entries one per line for inspection.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "printf \"%s\\n\" \"${PATH//:/$'\\''\\n'\\''}",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "now",
+    "category": "Core",
+    "description": "Print the current system date and 24-hour timestamp.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "date \"+%Y-%m-%d %H:%M:%S",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "week",
+    "category": "Core",
+    "description": "Print the current ISO calendar week number.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "date \"+%V",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "shellinfo",
+    "category": "Core",
+    "description": "Display active shell name, path, and version information.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "printf \"Shell: %s\\nVersion: %s\\n\" \"$SHELL\" \"${BASH_VERSION:-$ZSH_VERSION}",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ls",
+    "category": "Core",
+    "description": "List directory contents with colorized output (macOS BSD ls).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ls -G",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "l",
+    "category": "Core",
+    "description": "List all files in long format with human-readable sizes and color (macOS BSD ls).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ls -lahG",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ll",
+    "category": "Core",
+    "description": "List files in long format with human-readable sizes and color (macOS BSD ls).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ls -lhG",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "la",
+    "category": "Core",
+    "description": "List almost all files (excluding . and ..) with color (macOS BSD ls).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ls -AG",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ls",
+    "category": "Core",
+    "description": "List directory contents with colorized output (Linux GNU ls).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ls --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "l",
+    "category": "Core",
+    "description": "List all files in long format with human-readable sizes and color (Linux GNU ls).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ls -lah --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ll",
+    "category": "Core",
+    "description": "List files in long format with human-readable sizes and color (Linux GNU ls).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ls -lh --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "la",
+    "category": "Core",
+    "description": "List almost all files (excluding . and ..) with color (Linux GNU ls).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ls -A --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ld",
+    "category": "Core",
+    "description": "List only directories in the current working directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ls -ld -- */ 2>/dev/null",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "tree2",
+    "category": "Core",
+    "description": "Display directory tree structure limited to 2 levels deep.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "tree -L 2",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "tree3",
+    "category": "Core",
+    "description": "Display directory tree structure limited to 3 levels deep.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "tree -L 3",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "cpi",
+    "category": "Core",
+    "description": "Copy files interactively, prompting before overwriting an existing destination.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cp -i",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "mvi",
+    "category": "Core",
+    "description": "Move files interactively, prompting before overwriting an existing destination.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "mv -i",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "rmi",
+    "category": "Core",
+    "description": "Remove files interactively, prompting for confirmation before every deletion.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "rm -i",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "rmI",
+    "category": "Core",
+    "description": "Remove files prompting once before deleting more than 3 files or recursive targets.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "rm -I",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "lni",
+    "category": "Core",
+    "description": "Link files interactively, prompting before removing existing destination files.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ln -i",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "mkdirp",
+    "category": "Core",
+    "description": "Create directory tree including missing parent directories without complaining.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "mkdir -p",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "rm-safe",
+    "category": "Core",
+    "description": "Remove files with preserve-root guard and interactive confirmation.",
+    "os": "linux",
+    "type": "alias",
+    "command": "rm -I --preserve-root",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "chmod-safe",
+    "category": "Core",
+    "description": "Modify file permissions preventing unintended recursive operations on root.",
+    "os": "linux",
+    "type": "alias",
+    "command": "chmod --preserve-root",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "chown-safe",
+    "category": "Core",
+    "description": "Modify file ownership preventing unintended recursive operations on root.",
+    "os": "linux",
+    "type": "alias",
+    "command": "chown --preserve-root",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "chgrp-safe",
+    "category": "Core",
+    "description": "Modify file group preventing unintended recursive operations on root.",
+    "os": "linux",
+    "type": "alias",
+    "command": "chgrp --preserve-root",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "grep",
+    "category": "Core",
+    "description": "Search text with automatic color highlighting on matches.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "grep --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "egrep",
+    "category": "Core",
+    "description": "Search text using extended regular expressions with color highlighting.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "grep -E --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "fgrep",
+    "category": "Core",
+    "description": "Search text using fixed strings with color highlighting.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "grep -F --color=auto",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "countfiles",
+    "category": "Core",
+    "description": "Recursively count total regular files in current directory tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "find . -type f | wc -l",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "countdirs",
+    "category": "Core",
+    "description": "Recursively count total directories in current directory tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "find . -type d | wc -l",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "emptydirs",
+    "category": "Core",
+    "description": "Find all empty directories in current directory tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "find . -type d -empty",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "emptyfiles",
+    "category": "Core",
+    "description": "Find all empty zero-byte files in current directory tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "find . -type f -empty",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "ff",
+    "category": "Core",
+    "description": "Case-insensitive search for files by name substring in current tree.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "fdirectory",
+    "category": "Core",
+    "description": "Case-insensitive search for directories by name substring in current tree.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "extract",
+    "category": "Core",
+    "description": "Universal archive extractor detecting tar, bz2, gz, xz, zst, zip, 7z, and rar.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "calc",
+    "category": "Core",
+    "description": "Launch arbitrary-precision interactive calculator with standard math library.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "bc -l",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "b64e",
+    "category": "Core",
+    "description": "Encode standard input or stream to base64 format.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "base64",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "urlencode",
+    "category": "Core",
+    "description": "Percent-encode string from standard input using python3.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "python3 -c \"import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read().strip()))",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "urldecode",
+    "category": "Core",
+    "description": "Decode percent-encoded string from standard input using python3.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "python3 -c \"import sys,urllib.parse; print(urllib.parse.unquote(sys.stdin.read().strip()))",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "sha256file",
+    "category": "Core",
+    "description": "Calculate SHA-256 checksum across platforms (auto-detects sha256sum or shasum).",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "h",
+    "category": "Core",
+    "description": "Display complete shell command execution history.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "history",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "h10",
+    "category": "Core",
+    "description": "Display the 10 most recent commands from history.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "history 10",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "h20",
+    "category": "Core",
+    "description": "Display the 20 most recent commands from history.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "history 20",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "h50",
+    "category": "Core",
+    "description": "Display the 50 most recent commands from history.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "history 50",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "hg",
+    "category": "Core",
+    "description": "Filter shell command history by piped pattern search.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "history | grep",
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "hgrep",
+    "category": "Core",
+    "description": "Case-insensitive search through shell command execution history.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/00-core.aliases.bash"
+  },
+  {
+    "name": "g",
+    "category": "Git",
+    "description": "Short alias for the git command-line tool.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gs",
+    "category": "Git",
+    "description": "Show working tree status in short format with active branch name.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git status --short --branch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gst",
+    "category": "Git",
+    "description": "Show complete working tree status.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git status",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ga",
+    "category": "Git",
+    "description": "Add file contents to staging index.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git add",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gaa",
+    "category": "Git",
+    "description": "Add all changes across entire repository tree to staging index.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git add --all",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gap",
+    "category": "Git",
+    "description": "Interactively review and stage changes hunk-by-hunk.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git add --patch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gd",
+    "category": "Git",
+    "description": "Show unstaged working directory differences.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git diff",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gds",
+    "category": "Git",
+    "description": "Show changes staged for the next commit.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git diff --staged",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gdw",
+    "category": "Git",
+    "description": "Show differences highlighted at the individual word level.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git diff --word-diff",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gb",
+    "category": "Git",
+    "description": "List local branches with active branch highlighted.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git branch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gba",
+    "category": "Git",
+    "description": "List all local and remote tracking branches.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git branch --all",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gbd",
+    "category": "Git",
+    "description": "Safely delete a fully merged local branch.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git branch --delete",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gbD",
+    "category": "Git",
+    "description": "Force-delete a local branch regardless of merge status.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git branch --delete --force",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gbclean",
+    "category": "Git",
+    "description": "Delete local branches that have already been merged into default branch.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gc",
+    "category": "Git",
+    "description": "Record changes to the repository via commit editor.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git commit",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gcm",
+    "category": "Git",
+    "description": "Record changes to the repository with an inline commit message.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git commit -m",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gca",
+    "category": "Git",
+    "description": "Amend the previous commit while opening editor for commit message.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git commit --amend",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gcan",
+    "category": "Git",
+    "description": "Amend the previous commit reusing existing message without editing.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git commit --amend --no-edit",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gsw",
+    "category": "Git",
+    "description": "Switch to an existing branch.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git switch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gswc",
+    "category": "Git",
+    "description": "Create and switch to a new branch.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git switch --create",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "grs",
+    "category": "Git",
+    "description": "Restore working tree files from HEAD.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git restore",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "grss",
+    "category": "Git",
+    "description": "Unstage changes while preserving them in the working tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git restore --staged",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gco",
+    "category": "Git",
+    "description": "Checkout a branch or switch paths in working tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git checkout",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gcb",
+    "category": "Git",
+    "description": "Create and checkout a new branch (classic syntax).",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git checkout -b",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gf",
+    "category": "Git",
+    "description": "Download objects and refs from remote repository.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git fetch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gfa",
+    "category": "Git",
+    "description": "Fetch all remotes and prune obsolete remote tracking branches.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git fetch --all --prune",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gp",
+    "category": "Git",
+    "description": "Update remote refs along with associated objects.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git push",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gpu",
+    "category": "Git",
+    "description": "Push current branch and set upstream tracking reference on origin.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git push --set-upstream origin HEAD",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gpf",
+    "category": "Git",
+    "description": "Push with lease verification to safely prevent overwriting peer commits.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git push --force-with-lease",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gl",
+    "category": "Git",
+    "description": "Fetch from and integrate with remote repository or branch.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git pull",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "glr",
+    "category": "Git",
+    "description": "Fetch from remote and rebase current branch on top of upstream.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git pull --rebase",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gm",
+    "category": "Git",
+    "description": "Join two or more development histories together.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git merge",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gma",
+    "category": "Git",
+    "description": "Abort the current conflict-ridden merge process cleanly.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git merge --abort",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "grb",
+    "category": "Git",
+    "description": "Reapply commits on top of another base tip.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git rebase",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "grba",
+    "category": "Git",
+    "description": "Abort the rebase operation and reset HEAD to original branch.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git rebase --abort",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "grbc",
+    "category": "Git",
+    "description": "Continue rebase after resolving conflicted hunks.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git rebase --continue",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstash",
+    "category": "Git",
+    "description": "Save local modifications to a new stash commit.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash push",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstashp",
+    "category": "Git",
+    "description": "Remove single stashed state from stash list and apply to working tree.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash pop",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstashl",
+    "category": "Git",
+    "description": "List stashes recorded in current repository.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash list",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstashd",
+    "category": "Git",
+    "description": "Drop the most recent stash entry from the list.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash drop",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstashs",
+    "category": "Git",
+    "description": "Show diff changes recorded in the most recent stash.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash show --text",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gstasha",
+    "category": "Git",
+    "description": "Apply most recent stash without removing it from the stash stack.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git stash apply",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gtags",
+    "category": "Git",
+    "description": "List all repository tags ordered by descending creation date.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git tag --sort=-creatordate",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gremotes",
+    "category": "Git",
+    "description": "List all configured remote repositories with fetch and push URLs.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git remote --verbose",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gcontributors",
+    "category": "Git",
+    "description": "Summarize commit counts grouped by contributor name and email.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git shortlog --summary --numbered --email",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "glog",
+    "category": "Git",
+    "description": "Compact visual graph of recent commits with decoration and ref names.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git log --oneline --decorate --graph",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gloga",
+    "category": "Git",
+    "description": "Visual graph showing all branches, tags, and commits across repository.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git log --oneline --decorate --graph --all",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "glast",
+    "category": "Git",
+    "description": "Inspect the most recent commit with changed file statistics.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git log -1 HEAD --stat",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gwho",
+    "category": "Git",
+    "description": "Quick commit count overview per author sorted by count.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git shortlog -sn",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "glogp",
+    "category": "Git",
+    "description": "Pretty colored commit graph with relative dates, hashes, and authors.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --abbrev-commit",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gclone",
+    "category": "Git",
+    "description": "Clone a repository with argument validation to prevent empty calls.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "groot",
+    "category": "Git",
+    "description": "Print the absolute filesystem path of repository top-level directory.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gclean-preview",
+    "category": "Git",
+    "description": "Dry-run preview untracked and non-ignored files that git clean would delete.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git clean -ndx",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gclean-ignored-preview",
+    "category": "Git",
+    "description": "Dry-run preview ignored files that git clean would delete.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "git clean -ndX",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gundo",
+    "category": "Git",
+    "description": "Undo last commit softly, retaining all modified files in staging area.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "gpristine",
+    "category": "Git",
+    "description": "Reset repo to pristine state with explicit typed PRISTINE confirmation.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghpr",
+    "category": "Git",
+    "description": "Open the active pull request in the web browser via gh CLI.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh pr view --web",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghprs",
+    "category": "Git",
+    "description": "List open pull requests for the current repository.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh pr list",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghissues",
+    "category": "Git",
+    "description": "List open issues for the current repository.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh issue list",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghrepo",
+    "category": "Git",
+    "description": "Open current repository home page in web browser.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh repo view --web",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghruns",
+    "category": "Git",
+    "description": "List recent GitHub Actions workflow runs.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh run list",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "ghwatch",
+    "category": "Git",
+    "description": "Watch active GitHub Actions workflow run until completion.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "gh run watch",
+    "file": "aliases/10-git.aliases.bash"
+  },
+  {
+    "name": "d",
+    "category": "Docker",
+    "description": "Short alias for the docker CLI command.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dps",
+    "category": "Docker",
+    "description": "List currently running Docker containers.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker ps",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dpsa",
+    "category": "Docker",
+    "description": "List all Docker containers, including stopped and exited ones.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker ps --all",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "di",
+    "category": "Docker",
+    "description": "List locally available Docker images.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker images",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dimg",
+    "category": "Docker",
+    "description": "List Docker images using modern CLI syntax.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker image ls",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dvol",
+    "category": "Docker",
+    "description": "List all Docker volumes present on the host.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker volume ls",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dnet",
+    "category": "Docker",
+    "description": "List all configured Docker networks.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker network ls",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dinfo",
+    "category": "Docker",
+    "description": "Display system-wide Docker configuration and resource info.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker info",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dver",
+    "category": "Docker",
+    "description": "Show Docker client and daemon engine versions.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker version",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dstats",
+    "category": "Docker",
+    "description": "Stream real-time CPU, memory, and network usage of running containers.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker stats",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dtop",
+    "category": "Docker",
+    "description": "Display running processes of a specified container.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker top",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dinspect",
+    "category": "Docker",
+    "description": "Display detailed low-level JSON configuration of Docker objects.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker inspect",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dbuild",
+    "category": "Docker",
+    "description": "Build a container image from a Dockerfile in the current directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker build",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dbuildx",
+    "category": "Docker",
+    "description": "Build multi-architecture container images using Docker Buildx.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker buildx build",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dpull",
+    "category": "Docker",
+    "description": "Download container image from configured container registry.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker pull",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dpush",
+    "category": "Docker",
+    "description": "Upload local container image to remote container registry.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker push",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dlog",
+    "category": "Docker",
+    "description": "Fetch stdout and stderr logs of a container.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker logs",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dlogf",
+    "category": "Docker",
+    "description": "Tail and stream the last 200 log lines of a container in real-time.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker logs --follow --tail 200",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dsh",
+    "category": "Docker",
+    "description": "Open interactive shell in container with auto-detection for bash or sh.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "drun",
+    "category": "Docker",
+    "description": "Run interactive throwaway container with automatic cleanup on exit.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dip",
+    "category": "Docker",
+    "description": "Extract and print IPv4 address assigned to a running container.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dockerclean",
+    "category": "Docker",
+    "description": "Prune all stopped containers, unused networks, and dangling images.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker system prune -af --volumes",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dprune-preview",
+    "category": "Docker",
+    "description": "Preview Docker disk space consumption across containers and volumes.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker system df",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dprune",
+    "category": "Docker",
+    "description": "Display disk usage and interactively prompt before pruning system.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dstop-all",
+    "category": "Docker",
+    "description": "Interactively prompt and stop all currently running containers.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "docker-remove-stopped",
+    "category": "Docker",
+    "description": "Remove exited containers with explicit confirmation safeguard.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "docker-prune-all",
+    "category": "Docker",
+    "description": "Prune all unused Docker data with explicit typed PRUNE-DOCKER confirmation.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dc",
+    "category": "Docker",
+    "description": "Shortcut for docker compose subcommands.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcu",
+    "category": "Docker",
+    "description": "Create and start containers defined in compose file in foreground.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose up",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcud",
+    "category": "Docker",
+    "description": "Create and start compose containers in background detached mode.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose up --detach",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcub",
+    "category": "Docker",
+    "description": "Build images before starting compose containers in detached mode.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose up --detach --build",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcd",
+    "category": "Docker",
+    "description": "Stop and remove containers, networks, and images created by up.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose down",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcdv",
+    "category": "Docker",
+    "description": "Stop and remove compose containers along with named data volumes.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose down --volumes",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcps",
+    "category": "Docker",
+    "description": "List running containers managed by active docker compose project.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose ps",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcl",
+    "category": "Docker",
+    "description": "View logs from containers managed by docker compose.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose logs",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dclf",
+    "category": "Docker",
+    "description": "Follow and stream the last 200 logs from docker compose services.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose logs --follow --tail 200",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcb",
+    "category": "Docker",
+    "description": "Build or rebuild services defined in compose file.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose build",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcpull",
+    "category": "Docker",
+    "description": "Pull service images defined in compose file from registry.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose pull",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcconfig",
+    "category": "Docker",
+    "description": "Validate and view resolved compose file configuration.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose config",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "dcrestart",
+    "category": "Docker",
+    "description": "Restart running services in the active compose project.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "docker compose restart",
+    "file": "aliases/20-docker.aliases.bash"
+  },
+  {
+    "name": "k",
+    "category": "Kubernetes",
+    "description": "Short alias for the kubectl command-line tool.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kg",
+    "category": "Kubernetes",
+    "description": "Display one or many Kubernetes API resources.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kd",
+    "category": "Kubernetes",
+    "description": "Show detailed state of one or more Kubernetes resources.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl describe",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "ka",
+    "category": "Kubernetes",
+    "description": "Apply a configuration to a resource by filename or stdin.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl apply -f",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdel",
+    "category": "Kubernetes",
+    "description": "Delete resources by file names, stdin, resources and names.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl delete",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "ke",
+    "category": "Kubernetes",
+    "description": "Edit a Kubernetes resource directly in your text editor.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl edit",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgp",
+    "category": "Kubernetes",
+    "description": "List pods in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get pods",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgpa",
+    "category": "Kubernetes",
+    "description": "List all pods across all cluster namespaces.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get pods --all-namespaces",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgpw",
+    "category": "Kubernetes",
+    "description": "Watch pod creation, state transitions, and termination live.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get pods --watch",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgd",
+    "category": "Kubernetes",
+    "description": "List deployments in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get deployments",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgs",
+    "category": "Kubernetes",
+    "description": "List services in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get services",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgi",
+    "category": "Kubernetes",
+    "description": "List ingress resources in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get ingress",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgn",
+    "category": "Kubernetes",
+    "description": "List all worker and control plane nodes in the cluster.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get nodes",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgns",
+    "category": "Kubernetes",
+    "description": "List all namespaces defined in the cluster.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get namespaces",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgcm",
+    "category": "Kubernetes",
+    "description": "List ConfigMaps in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get configmaps",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgsec",
+    "category": "Kubernetes",
+    "description": "List Secrets in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get secrets",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgpv",
+    "category": "Kubernetes",
+    "description": "List PersistentVolumes in the cluster.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get persistentvolumes",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kgpvc",
+    "category": "Kubernetes",
+    "description": "List PersistentVolumeClaims in the active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get persistentvolumeclaims",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdp",
+    "category": "Kubernetes",
+    "description": "Describe detailed status and events of a specified pod.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl describe pod",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdd",
+    "category": "Kubernetes",
+    "description": "Describe detailed status and events of a specified deployment.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl describe deployment",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdn",
+    "category": "Kubernetes",
+    "description": "Describe detailed status and metrics of a specified cluster node.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl describe node",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kl",
+    "category": "Kubernetes",
+    "description": "Print the logs for a container in a pod.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl logs",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "klf",
+    "category": "Kubernetes",
+    "description": "Follow and stream the last 200 log lines from a pod container.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl logs --follow --tail=200",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kexec",
+    "category": "Kubernetes",
+    "description": "Execute an interactive command inside a target pod container.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl exec -it",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kpf",
+    "category": "Kubernetes",
+    "description": "Forward one or more local ports to a pod or service.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kctx",
+    "category": "Kubernetes",
+    "description": "Display current active Kubernetes context name.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl config current-context",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kctxs",
+    "category": "Kubernetes",
+    "description": "List all available contexts in kubeconfig.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl config get-contexts",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kns",
+    "category": "Kubernetes",
+    "description": "Display currently configured default namespace in active context.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl config view --minify --output \"jsonpath={..namespace}",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kuse",
+    "category": "Kubernetes",
+    "description": "Switch the active Kubernetes context to a specified target.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "knamespace",
+    "category": "Kubernetes",
+    "description": "Change the default namespace for the active Kubernetes context.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kroll",
+    "category": "Kubernetes",
+    "description": "Watch the rollout status of a deployment until completion.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl rollout status",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "krestart",
+    "category": "Kubernetes",
+    "description": "Trigger rolling restart of a deployment or daemonset.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl rollout restart",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "khistory",
+    "category": "Kubernetes",
+    "description": "View previous rollout revision history for a workload.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl rollout history",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kundoroll",
+    "category": "Kubernetes",
+    "description": "Roll back workload to previous deployment revision.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl rollout undo",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kapi",
+    "category": "Kubernetes",
+    "description": "List the complete set of API resources supported on the server.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl api-resources",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kexplain",
+    "category": "Kubernetes",
+    "description": "Get documentation for a resource field in the terminal.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl explain",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdiff",
+    "category": "Kubernetes",
+    "description": "Diff live cluster state against a proposed resource manifest.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl diff -f",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kev",
+    "category": "Kubernetes",
+    "description": "List cluster events sorted chronologically by timestamp.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get events --sort-by=.metadata.creationTimestamp",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "ktop",
+    "category": "Kubernetes",
+    "description": "Display resource (CPU/memory) usage of nodes or pods.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl top",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "ktopn",
+    "category": "Kubernetes",
+    "description": "Display CPU and memory utilization across cluster nodes.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl top nodes",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "ktopp",
+    "category": "Kubernetes",
+    "description": "Display CPU and memory utilization across pods in namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl top pods",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kfailedpods",
+    "category": "Kubernetes",
+    "description": "Query pods across all namespaces that are not in Running or Completed state.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "kubectl get pods --field-selector=status.phase!=Running,status.phase!=Succeeded --all-namespaces",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "kdebug",
+    "category": "Kubernetes",
+    "description": "Attach an ephemeral debug container with troubleshooting tools to a pod.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hm",
+    "category": "Kubernetes",
+    "description": "Unambiguous shortcut for Helm package manager.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmls",
+    "category": "Kubernetes",
+    "description": "List Helm releases in the current active namespace.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm list",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmlsa",
+    "category": "Kubernetes",
+    "description": "List Helm releases across all cluster namespaces.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm list --all-namespaces",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmrepo",
+    "category": "Kubernetes",
+    "description": "List all configured Helm chart repositories.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm repo list",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmrepou",
+    "category": "Kubernetes",
+    "description": "Update information of available charts locally from chart repositories.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm repo update",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmsearch",
+    "category": "Kubernetes",
+    "description": "Search repositories for keyword matches in Helm charts.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm search repo",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmstatus",
+    "category": "Kubernetes",
+    "description": "Display the status of a named Helm release.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm status",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmhistory",
+    "category": "Kubernetes",
+    "description": "Fetch historical release revisions for a Helm deployment.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm history",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmrollback",
+    "category": "Kubernetes",
+    "description": "Roll back a release to a previous historical revision.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm rollback",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmtemplate",
+    "category": "Kubernetes",
+    "description": "Render chart templates locally and display output.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm template",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "hmlint",
+    "category": "Kubernetes",
+    "description": "Examine a chart for possible issues and verify best practices.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "helm lint",
+    "file": "aliases/30-k8s.aliases.bash"
+  },
+  {
+    "name": "listeners",
+    "category": "Networking",
+    "description": "List all system processes currently listening on TCP sockets.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "lsof -nP -iTCP -sTCP:LISTEN",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "connections",
+    "category": "Networking",
+    "description": "List all active internet network socket connections.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "lsof -nP -i",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "portcheck",
+    "category": "Networking",
+    "description": "Identify processes listening on a specific TCP port number.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "killport",
+    "category": "Networking",
+    "description": "Identify and interactively terminate process listening on given TCP port.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "netstat-listen",
+    "category": "Networking",
+    "description": "Query listening TCP/UDP ports using netstat across platforms.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "netstat -tuln 2>/dev/null || netstat -an | grep LISTEN",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "publicip",
+    "category": "Networking",
+    "description": "Query and display your external public IPv4 address.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "localip",
+    "category": "Networking",
+    "description": "Query and display primary internal LAN IP address.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "ips",
+    "category": "Networking",
+    "description": "Display all configured network interfaces with their IP addresses.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "myip",
+    "category": "Networking",
+    "description": "Print clean formatted summary of both internal and external IP addresses.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "routeinfo",
+    "category": "Networking",
+    "description": "Display operating system IP routing table entries.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ip route 2>/dev/null || netstat -rn",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "dnsinfo",
+    "category": "Networking",
+    "description": "Inspect local system DNS name server resolver configuration.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cat /etc/resolv.conf",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "hostsfile",
+    "category": "Networking",
+    "description": "Inspect system local static hostname mappings (/etc/hosts).",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "cat /etc/hosts",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "ping5",
+    "category": "Networking",
+    "description": "Send exactly 5 ICMP echo requests to target host and terminate.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ping -c 5",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "pingdns",
+    "category": "Networking",
+    "description": "Verify internet reachability by pinging Cloudflare Public DNS (1.1.1.1).",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ping -c 5 1.1.1.1",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "flushdns",
+    "category": "Networking",
+    "description": "Flush the local operating system DNS resolver cache.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "headers",
+    "category": "Networking",
+    "description": "Fetch and display only HTTP response headers for target URL.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "curl --head",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "curlv",
+    "category": "Networking",
+    "description": "Fetch URL with verbose curl debugging output enabled.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "curl --verbose",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "jsonheader",
+    "category": "Networking",
+    "description": "Send HTTP request with Accept application/json request header.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "curl -H \"Accept: application/json",
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "serve",
+    "category": "Networking",
+    "description": "Spin up local development HTTP server bound to loopback 127.0.0.1.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "serve-lan",
+    "category": "Networking",
+    "description": "Spin up development HTTP server bound to 0.0.0.0 for LAN access.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/40-net.aliases.bash"
+  },
+  {
+    "name": "dfh",
+    "category": "System",
+    "description": "Display disk filesystem space usage with human-readable units.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "df -h",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "dfi",
+    "category": "System",
+    "description": "Display inode usage and availability across mounted filesystems.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "df -i",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "usage",
+    "category": "System",
+    "description": "Calculate and display total disk usage of current directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "du -sh .",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "biggest",
+    "category": "System",
+    "description": "Identify top 20 largest files and folders in current directory.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "du -sh ./* 2>/dev/null | sort -h | tail -20",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "du1",
+    "category": "System",
+    "description": "Display disk usage for immediate subdirectories (depth 1, BSD du).",
+    "os": "macos",
+    "type": "alias",
+    "command": "du -h -d 1",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "du1",
+    "category": "System",
+    "description": "Display disk usage for immediate subdirectories (depth 1, GNU du).",
+    "os": "linux",
+    "type": "alias",
+    "command": "du -h --max-depth=1",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "partitions",
+    "category": "System",
+    "description": "Display physical storage partitions excluding virtual and tmpfs mounts.",
+    "os": "linux",
+    "type": "alias",
+    "command": "df -hT -x tmpfs -x devtmpfs",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "disk",
+    "category": "System",
+    "description": "Launch interactive ncurses disk usage analyzer.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ncdu",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "processes",
+    "category": "System",
+    "description": "List all active processes running across the operating system.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "ps aux",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "uptimeh",
+    "category": "System",
+    "description": "Show system uptime and current load averages.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "uptime",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "load",
+    "category": "System",
+    "description": "Print system uptime, user count, and load averages.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "uptime",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "kernel",
+    "category": "System",
+    "description": "Print complete operating system kernel name, version, and architecture.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "uname -a",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "mem",
+    "category": "System",
+    "description": "Display macOS virtual memory page statistics.",
+    "os": "macos",
+    "type": "alias",
+    "command": "vm_stat",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "psmem",
+    "category": "System",
+    "description": "List processes sorted descending by physical memory usage (macOS).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ps aux | sort -nrk 4",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "psmem10",
+    "category": "System",
+    "description": "Display top 10 memory-consuming processes (macOS).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ps aux | sort -nrk 4 | head -10",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pscpu",
+    "category": "System",
+    "description": "List processes sorted descending by CPU utilization (macOS).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ps aux | sort -nrk 3",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pscpu10",
+    "category": "System",
+    "description": "Display top 10 CPU-consuming processes (macOS).",
+    "os": "macos",
+    "type": "alias",
+    "command": "ps aux | sort -nrk 3 | head -10",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "mem",
+    "category": "System",
+    "description": "Display total, used, and free system memory with human-readable units.",
+    "os": "linux",
+    "type": "alias",
+    "command": "free -h",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "psmem",
+    "category": "System",
+    "description": "List processes sorted descending by physical memory percentage (Linux).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ps aux --sort=-%mem",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "psmem10",
+    "category": "System",
+    "description": "Display top 10 memory-consuming processes (Linux).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ps aux --sort=-%mem | head -11",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pscpu",
+    "category": "System",
+    "description": "List processes sorted descending by CPU percentage (Linux).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ps aux --sort=-%cpu",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pscpu10",
+    "category": "System",
+    "description": "Display top 10 CPU-consuming processes (Linux).",
+    "os": "linux",
+    "type": "alias",
+    "command": "ps aux --sort=-%cpu | head -11",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "psgrep",
+    "category": "System",
+    "description": "Search process list by pattern without matching grep process itself.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pskill",
+    "category": "System",
+    "description": "Search processes by pattern and interactively confirm termination.",
+    "os": "cross-platform",
+    "type": "function",
+    "command": null,
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "cpuinfo",
+    "category": "System",
+    "description": "Display detailed CPU architecture and core information.",
+    "os": "linux",
+    "type": "alias",
+    "command": "lscpu",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "blockdevices",
+    "category": "System",
+    "description": "List block devices and their associated filesystems with UUIDs.",
+    "os": "linux",
+    "type": "alias",
+    "command": "lsblk -f",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "pci",
+    "category": "System",
+    "description": "List all PCI bus devices and hardware controllers.",
+    "os": "linux",
+    "type": "alias",
+    "command": "lspci",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "usb",
+    "category": "System",
+    "description": "List all USB controllers and connected USB devices.",
+    "os": "linux",
+    "type": "alias",
+    "command": "lsusb",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "mounts",
+    "category": "System",
+    "description": "List mounted filesystems in clean hierarchical tree representation.",
+    "os": "linux",
+    "type": "alias",
+    "command": "findmnt",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "journalerrors",
+    "category": "System",
+    "description": "Show system errors and critical alerts logged during current boot.",
+    "os": "linux",
+    "type": "alias",
+    "command": "journalctl -p err..alert -b",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "failedservices",
+    "category": "System",
+    "description": "List systemd service units that entered a failed state.",
+    "os": "linux",
+    "type": "alias",
+    "command": "systemctl --failed",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "services",
+    "category": "System",
+    "description": "List all loaded and active systemd services.",
+    "os": "linux",
+    "type": "alias",
+    "command": "systemctl --type=service",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "gpu",
+    "category": "System",
+    "description": "Query NVIDIA GPU status, memory consumption, and thermals.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "nvidia-smi",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "gpuwatch",
+    "category": "System",
+    "description": "Monitor NVIDIA GPU utilization continuously every 2 seconds.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "watch -n 2 nvidia-smi",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "sc",
+    "category": "System",
+    "description": "Control the systemd system and service manager.",
+    "os": "linux",
+    "type": "alias",
+    "command": "systemctl",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "scu",
+    "category": "System",
+    "description": "Manage systemd services belonging to the current user.",
+    "os": "linux",
+    "type": "alias",
+    "command": "systemctl --user",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "jc",
+    "category": "System",
+    "description": "Query systemd journal system logs.",
+    "os": "linux",
+    "type": "alias",
+    "command": "journalctl",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "jcf",
+    "category": "System",
+    "description": "Follow and stream systemd journal logs live.",
+    "os": "linux",
+    "type": "alias",
+    "command": "journalctl --follow",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "jcb",
+    "category": "System",
+    "description": "View systemd journal logs recorded since the current boot.",
+    "os": "linux",
+    "type": "alias",
+    "command": "journalctl --boot",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "jcxe",
+    "category": "System",
+    "description": "Show journal logs with catalog explanations and newest lines first.",
+    "os": "linux",
+    "type": "alias",
+    "command": "journalctl -xe",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "svcstatus",
+    "category": "System",
+    "description": "Inspect running status and recent logs for specified service unit.",
+    "os": "linux",
+    "type": "function",
+    "command": null,
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "svclogs",
+    "category": "System",
+    "description": "View and filter journalctl logs for a specific systemd unit.",
+    "os": "linux",
+    "type": "function",
+    "command": null,
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "sys-reboot",
+    "category": "System",
+    "description": "Explicit reboot of machine requiring sudo elevation.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "sudo systemctl reboot",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "sys-poweroff",
+    "category": "System",
+    "description": "Explicit power off and shutdown of machine requiring sudo elevation.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "sudo systemctl poweroff",
+    "file": "aliases/50-sys.aliases.bash"
+  },
+  {
+    "name": "sys-suspend",
+    "category": "System",
+    "description": "Explicit suspension of system state into low-power sleep mode.",
+    "os": "cross-platform",
+    "type": "alias",
+    "command": "sudo systemctl suspend",
+    "file": "aliases/50-sys.aliases.bash"
+  }
+]

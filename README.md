@@ -54,34 +54,40 @@ Some completion settings are shell-specific and are stored separately.
 ```text
 awesome-bash-alias/
 ├── README.md
-├── aliases.sh
-├── install.sh
-├── uninstall.sh
-├── completions/
-│   ├── bash.sh
-│   └── zsh.sh
-├── modules/
-│   ├── core.sh
-│   ├── navigation.sh
-│   ├── files.sh
-│   ├── git.sh
-│   ├── docker.sh
-│   ├── kubernetes.sh
-│   ├── networking.sh
-│   ├── system.sh
-│   ├── packages.sh
-│   ├── development.sh
-│   ├── infrastructure.sh
-│   ├── cloud.sh
-│   └── macos.sh
-├── optional/
-│   ├── modern-cli.sh
-│   └── dangerous.sh
-└── tests/
-    └── aliases.bats
+├── aliases.sh                          # Universal master loader (loads modules in numerical order)
+├── metadata.json                       # Downstream JSON catalog for web application UI
+├── aliases/
+│   ├── 00-core.aliases.bash            # Shell navigation, safety guards, search, history
+│   ├── 10-git.aliases.bash             # Git shortcuts, log visualizers, branch cleaning, stashes
+│   ├── 20-docker.aliases.bash          # Container lifecycle, pruning, compose, debugging
+│   ├── 30-k8s.aliases.bash             # Kubectl, namespaces, pod logs, cluster diagnostics
+│   ├── 40-net.aliases.bash             # Port inspection, public/local IP, DNS, dev servers
+│   └── 50-sys.aliases.bash             # Disk analysis, process killers, CPU/mem, systemd
+└── scripts/
+    └── export_metadata.py              # Metadata extractor & JSON manifest generator
 ```
 
-This modular structure allows users to enable only the sections they need.
+This modular structure allows users to source individual domain files or load the complete suite predictably.
+
+---
+
+## 🏷️ Standardized Metadata Format (JSDoc-style Bash)
+
+Every alias and helper function in `aliases/` is documented with standardized JSDoc-style metadata headers for automated static parsing and downstream web app consumption:
+
+```bash
+# @name: dockerclean
+# @category: Docker
+# @description: Prune all stopped containers, unused networks, and dangling images.
+# @os: cross-platform
+alias dockerclean='docker system prune -af --volumes'
+```
+
+### Supported Metadata Tags:
+- `@name`: Unique identifier matching the alias or helper function.
+- `@category`: Domain category (`Core`, `Git`, `Docker`, `Kubernetes`, `Networking`, `System`).
+- `@description`: Human-readable summary of command behavior and purpose.
+- `@os`: Operating system target (`cross-platform`, `macos`, or `linux`).
 
 ---
 
